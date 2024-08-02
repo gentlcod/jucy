@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+
+#preloader{
+  background: #FFEDB7 url(../../../public/assets/preloader.gif) no-repeat center center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 2000;
+  background-size: 19%;
+}
+
+
+
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -17,17 +30,20 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-size: cover;
+  background: url(../../../public/assets/main-bg\ .png) no-repeat center center fixed;
 }
+
+
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+
+
+
