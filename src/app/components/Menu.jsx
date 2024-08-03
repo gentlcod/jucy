@@ -9,7 +9,7 @@ const Menu = () => {
     <div>
       <h2 className='mt-[150px] text-[#53422B] xl:text-5xl text-3xl mb-5 
       lg:mb-0 font-bold leading-loose'
-    >
+      data-aos="fade-right" data-aos-duration="1500" >
         Explore best <br />
         menu sections
       </h2>
@@ -19,11 +19,11 @@ const Menu = () => {
      
 
       {/* menu boxes  */}
-      <div className='flex items-center flex-wrap justify-between'>
-      <div>
-        <div className='relative p-[10px] w-[250px] h-[270px] bg-gradient-custom border-[3px] border-[#fff] rounded-xl'>
-              {/* Pseudo-element for background blur */}
-  <div className='absolute inset-0 bg-white/30' style={{ backdropFilter: 'blur(24px)' }}></div>
+      <div className='flex items-center flex-wrap justify-between'  data-aos="fade-down" data-aos-duration="1500">
+      <div className='relative w-[250px] h-[270px]'>
+      <div className='absolute inset-0 bg-gradient-custom border border-[1.5px] border-white rounded-3xl blur-sm'></div>
+      <div className='relative p-[10px] z-10 flex flex-col'>
+
             <div  className='relative ml-4'>
             <Image
             src={blueBerryJuiceImg}
@@ -34,7 +34,7 @@ const Menu = () => {
             <h5 className='mt-2 text-[#53422B] font-semibold'>
             Berry Burst Bliss
             </h5>
-            <p className='mt-2 text-xs text-[#555555]'>
+            <p className='mt-2 text-xs font-thin text-[#555555]'>
                 Rich in antioxidants, this juice 
                 <br /> offers a sweet and subtly
                 <br /> tart flavor.
@@ -48,9 +48,9 @@ const Menu = () => {
 
 
 
-      <div>
-        <div className='relative p-[10px] w-[250px] lg:mr-[-15px] h-[270px] bg-gradient-custom border-[3px] border-[#fff] rounded-xl'>
-            <div  className='relative ml-4 mt-[-31px]'>
+      <div className='relative w-[250px] h-[270px]'>
+      <div className='absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm'></div>
+            <div  className='relative ml-4 mt-[-19px]'>
             <Image
             src={mangoJuiceImg}
             alt='mango juice'
@@ -61,19 +61,19 @@ const Menu = () => {
             Mango Bliss Burst
             </h5>
 
-            <p className='mt-2 text-xs text-[#555555]'>
+            <p className='mt-2 text-xs font-thin text-[#555555]'>
             Sweet, creamy, and tropical, high  
             <br /> in vitamins A and C.
 
             </p>
             </div>
         </div>
-      </div>
+     
 
 
 
-      <div>
-        <div className='relative p-[10px] w-[250px] h-[270px] lg:mr-[-120px] bg-gradient-custom border-[3px] border-[#fff] rounded-xl'>
+      <div className='relative w-[250px] h-[270px] lg:mr-[-120px]'>
+      <div className='absolute inset-0  bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm'></div>
             <div  className='relative ml-4 mt-[-17px]'>
             <Image
             src={kiwiJuiceImg}
@@ -86,14 +86,12 @@ const Menu = () => {
             Pure Kiwi Joy
             </h5>
 
-            <p className='mt-2 text-xs text-[#555555]'>
-                Rich in antioxidants, this juice 
-                <br /> offers a sweet and subtly
-                <br /> tart flavor.
+            <p className='mt-2 text-xs font-thin text-[#555555]'>
+            Tangy and sweet with vibrant green color,
+           is packed with vitamins C and K.
             </p>
         </div>
         </div>
-      </div>
       </div>
       </div>
 
@@ -102,7 +100,8 @@ const Menu = () => {
       <Link
       href='/menu-categories'
       >
-      <button className='rounded-md bg-[#53422B] text-white py-4 px-12'>
+      <button className='rounded-md bg-[#53422B] text-white py-4 px-12'
+      data-aos="zoom-in" data-aos-duration="1500" >
         See All
       </button>
       </Link>

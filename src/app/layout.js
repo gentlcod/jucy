@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import Preloader from './components/Preloader';
 import AnimationWrapper from './components/AnimationWrapper';
 import './styles/globals.css';
 
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+      <Preloader />
         <AnimationWrapper>
         {children}
         </AnimationWrapper>

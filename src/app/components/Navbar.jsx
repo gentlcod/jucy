@@ -73,43 +73,48 @@ const Navbar = () => {
         <div className='lg:ml-[70px] cursor-pointer'>
           <button onClick={() => handleNavClick('home')}>
             <div className='mt-3'/>
-            <Image src={logoImg} alt='logo' height={85} width={85} />
+            <Image src={logoImg} alt='logo' height={85} width={85} data-aos="fade-right" data-aos-duration="1500"/>
           </button>
         </div>
         <div className='font-md text-primary md:mr-[15px]'>
           <ul className='hidden md:flex flex items-center text-[#53422B]'>
     
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'home' ? 'font-bold' : ''}`} onClick={() => handleNavClick('home')}>
+            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'home' ? 'font-bold' : ''}`} onClick={() => handleNavClick('home')} data-aos="fade-down" data-aos-duration="1500">
               Home
             </li>
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'about' ? 'font-bold' : ''}`} onClick={() => handleNavClick('about')}>
+            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'about' ? 'font-bold' : ''}`} onClick={() => handleNavClick('about')} data-aos="fade-down" data-aos-duration="1500">
               About
             </li>
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'menu' ? 'font-bold' : ''}`} onClick={() => handleNavClick('menu')}>
+            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'menu' ? 'font-bold' : ''}`} onClick={() => handleNavClick('menu')} data-aos="fade-down" data-aos-duration="1500">
               Menu
             </li>
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'contact' ? 'font-bold' : ''}`} onClick={() => handleNavClick('contact')}>
+            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'contact' ? 'font-bold' : ''}`} onClick={() => handleNavClick('contact')} data-aos="fade-down" data-aos-duration="1500">
               Contact
             </li>
-            <Link href='login-page' 
+
+    
+
+         
+            <Link href='/login-page' 
             className='border 
             border-[#53422B] md:ml-[139px] lg:ml-[279px] p-[3.7px] rounded-md 
-            bg-transparent'>
+            bg-transparent' data-aos="fade-left" data-aos-duration="1500">
               Sign in
             </Link>
+      
 
 
-            <Link href='signup-page' 
+            <Link href='/signup-page' 
             className='ml-[9px] lg:mr-[100px]  
             bg-[#53422B] p-[3.7px] rounded-md 
             text-white border border-[#53422B]'
-            >
+            data-aos="fade-left" data-aos-duration="1500">
               Sign up
             </Link>
           </ul>
 
           {/* Mobile Responsive */}
-          <div onClick={handleNav} className='md:hidden cursor-pointer'>
+          <div onClick={handleNav} className='md:hidden cursor-pointer'  data-aos="fade-up" data-aos-duration="1500">
             {nav ?  '' : <AiOutlineMenu size={25}/>} 
           </div>
         </div>

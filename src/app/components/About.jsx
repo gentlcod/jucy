@@ -15,7 +15,7 @@ const About = () => {
         </h4>
 
         {/* BOXES */}
-        <div className='flex flex-wrap gap-4 mt-[250px] lg:mr-[-129px]'>
+        <div className='flex flex-wrap gap-4 mt-[250px] lg:mr-[-129px]' data-aos="fade-left" data-aos-duration="1500">
           <div className=' w-[150px] h-[200px] flex items-center justify-center rounded-xl bg-gradient-custom shadow-2xl'>
             <Image
               src={pineappleJuiceImg}
@@ -44,7 +44,7 @@ const About = () => {
 
       <div className='mt-5'>
         <p className='text-[#53422B] text-md'
-        data-aos='fade-up'>
+        data-aos='fade-down'>
           Our commitment to excellence 
           <br /> in the realm of juices sets us 
           <br /> apart from the competition.

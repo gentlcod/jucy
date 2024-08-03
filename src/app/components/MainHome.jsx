@@ -9,12 +9,14 @@ const MainHome = () => {
     <section id='home' className='py-[30px] lg:pt-[90px] pt-[225px] lg:px-[100px] px-[25px] max-w-[1280px]'>
       <div className='flex items-center justify-between'>
         <h2 className='text-[#53422B] xl:text-5xl text-3xl mb-5 
-        lg:mb-0 font-bold lg:mt-[-50px]'>
+        lg:mb-0 font-bold lg:mt-[-50px]'
+        data-aos='fade-right'>
           Revitalize Your Routine, <br />
           Fresh, Fruity Fantastic
         </h2>
 
-        <div className='lg:mt-[100px] xl:mr-[-180px]'>
+        <div className='lg:mt-[100px] xl:mr-[-180px]'
+         data-aos="fade-left" data-aos-duration="1500">
           <Image
             src={homeMainImg}
             width={390}
@@ -25,7 +27,8 @@ const MainHome = () => {
       </div>
 
       <div className='lg:mt-[-170px]'>
-        <p className='text-[#53422B] text-sm lg:text-md'>
+        <p className='text-[#53422B] text-sm lg:text-md'
+        data-aos="fade-right" data-aos-duration="1500">
         "Savor the symphony of flavors, with nature's sweetness & deliciousness.
           <br />
           Get the best variety of 100% organic juices here!"
@@ -35,7 +38,7 @@ const MainHome = () => {
 
       {/* Buttons  */}
       <div className='flex items-center 
-      justify-start'>
+      justify-start' data-aos='fade-right'>
         <Link href='/menu-pages/menu-categories'
         className='bg-[#53422B] mt-16 px-7 
         p-4 rounded-lg text-white'>

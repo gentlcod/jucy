@@ -1,5 +1,5 @@
 import Navbar from "./components/Navbar";
-import Preloader from "./components/Preloader";
+
 import MainHome from "./components/MainHome";
 import About from "./components/About";
 import Menu from "./components/Menu";
@@ -12,8 +12,7 @@ export default function Home() {
 
 
   return (
-    <>
-      <Preloader />
+    <>   
       <Navbar />
       <MainHome />
       <About/>

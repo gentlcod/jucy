@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
 import Image from 'next/image'
 import { FaMapPin } from "react-icons/fa";
@@ -16,11 +17,12 @@ const Contact_And_Footer = () => {
 
   
        <h2 className='text-[#53422B] xl:text-5xl text-3xl mb-5 
-      lg:mb-0 font-bold lg:mt-[-50px]'>
+      lg:mb-0 font-bold lg:mt-[-50px]'
+      data-aos="fade-right" data-aos-duration="1500" >
        Contact Us
       </h2>
 
-      <div className='flex flex-row items-center justify-between w-[1180px]'>
+      <div className='flex flex-row items-center justify-between w-[1180px]' data-aos="fade-down" data-aos-duration="1500">
 
 
          {/* location  */}
@@ -155,7 +157,7 @@ const Contact_And_Footer = () => {
       {/* footer  */}
 
       <footer>
-        <div className='border border-[.25px] border-[#53422B] w-full' style={{color: '#53422B'}}/>
+        <div className='border border-[0.1px] border-[#53422B] w-full' style={{color: '#53422B'}}/>
         <p className='text-[#53422B] text-md py-4 text-center'>
           &copy; 2024 All Rights Reserved By Jucy 
         </p>
