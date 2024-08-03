@@ -79,23 +79,23 @@ const Navbar = () => {
         <div className='font-md text-primary md:mr-[15px]'>
           <ul className='hidden md:flex flex items-center text-[#53422B]'>
     
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'home' ? 'font-bold' : ''}`} onClick={() => handleNavClick('home')} data-aos="fade-down" data-aos-duration="1500">
+            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'home' ? 'font-bold' : ''}`} onClick={() => handleNavClick('home')}>
               Home
             </li>
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'about' ? 'font-bold' : ''}`} onClick={() => handleNavClick('about')} data-aos="fade-down" data-aos-duration="1500">
+            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'about' ? 'font-bold' : ''}`} onClick={() => handleNavClick('about')}>
               About
             </li>
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'menu' ? 'font-bold' : ''}`} onClick={() => handleNavClick('menu')} data-aos="fade-down" data-aos-duration="1500">
+            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'menu' ? 'font-bold' : ''}`} onClick={() => handleNavClick('menu')}>
               Menu
             </li>
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'contact' ? 'font-bold' : ''}`} onClick={() => handleNavClick('contact')} data-aos="fade-down" data-aos-duration="1500">
+            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'contact' ? 'font-bold' : ''}`} onClick={() => handleNavClick('contact')}>
               Contact
             </li>
 
     
 
          
-            <Link href='/login-page' 
+            <Link href='/loginpage' 
             className='border 
             border-[#53422B] md:ml-[139px] lg:ml-[279px] p-[3.7px] rounded-md 
             bg-transparent' data-aos="fade-left" data-aos-duration="1500">
@@ -104,13 +104,13 @@ const Navbar = () => {
       
 
 
-            <Link href='/signup-page' 
+            <a href='/signuppage' 
             className='ml-[9px] lg:mr-[100px]  
             bg-[#53422B] p-[3.7px] rounded-md 
             text-white border border-[#53422B]'
             data-aos="fade-left" data-aos-duration="1500">
               Sign up
-            </Link>
+            </a>
           </ul>
 
           {/* Mobile Responsive */}

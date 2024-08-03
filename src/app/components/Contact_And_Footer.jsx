@@ -22,7 +22,7 @@ const Contact_And_Footer = () => {
        Contact Us
       </h2>
 
-      <div className='flex flex-row items-center justify-between w-[1180px]' data-aos="fade-down" data-aos-duration="1500">
+      <div className='flex flex-col lg:flex-row items-center gap-9 justify-between lg:w-[1180px]' data-aos="fade-down" data-aos-duration="1500">
 
 
          {/* location  */}
@@ -86,12 +86,12 @@ const Contact_And_Footer = () => {
           <input className='mt-2 p-2 rounded-lg text-[#555555] opacity-[%50] w-[250px]' type="email" placeholder='Email' />
           <br />
 
-          <textarea className='mt-2 p-2 rounded-lg' placeholder='Message' rows={3} cols={25}/>
+          <textarea className='mt-2 p-2 rounded-lg w-[250px]' placeholder='Message' rows={3}/>
         
         </form>
         <button 
         type='submit'
-        className='mt-3 p-2 px-7 font-medium lg:ml-[4.5rem] rounded-lg bg-[#FF9900] text-[#53422B]'
+        className='mt-3 p-2 px-7 font-medium ml-[4.5rem] rounded-lg bg-[#FF9900] text-[#53422B]'
         >
             Submit
           </button>

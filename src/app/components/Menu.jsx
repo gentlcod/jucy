@@ -19,7 +19,7 @@ const Menu = () => {
      
 
       {/* menu boxes  */}
-      <div className='flex items-center flex-wrap justify-between'  data-aos="fade-down" data-aos-duration="1500">
+      <div className='flex items-center lg:gap-0 gap-7 lg:ml-0 ml-[3.5rem] flex-wrap justify-between'  data-aos="fade-down" data-aos-duration="1500">
       <div className='relative w-[250px] h-[270px]'>
       <div className='absolute inset-0 bg-gradient-custom border border-[1.5px] border-white rounded-3xl blur-sm'></div>
       <div className='relative p-[10px] z-10 flex flex-col'>
@@ -100,7 +100,7 @@ const Menu = () => {
       <Link
       href='/menu-categories'
       >
-      <button className='rounded-md bg-[#53422B] text-white py-4 px-12'
+      <button className='rounded-md bg-[#53422B] text-white py-4 px-12 lg:ml-0 ml-[6.6rem]'
       data-aos="zoom-in" data-aos-duration="1500" >
         See All
       </button>
