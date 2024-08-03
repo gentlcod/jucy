@@ -6,8 +6,13 @@ import { homeMainImg } from '../../../public/assets';
 
 const MainHome = () => {
   return (
-    <section id='home' className='py-[30px] lg:pt-[90px] pt-[225px] lg:px-[100px] px-[25px] max-w-[1280px]'>
-      <div className='flex items-center justify-between'>
+
+    <section id='home' className=' overflow-hidden py-[30px] pt-[90px] lg:px-[100px] px-[25px] max-w-[1280px]'>
+
+  
+
+      
+      <div className='lg:mt-0 mt-12 flex items-center justify-between'>
         <h2 className='text-[#53422B] xl:text-5xl text-3xl mb-5 
         lg:mb-0 font-bold lg:mt-[-50px]'
         data-aos='fade-right'>
@@ -15,7 +20,7 @@ const MainHome = () => {
           Fresh, Fruity Fantastic
         </h2>
 
-        <div className='lg:mt-[100px] xl:mr-[-180px]'
+        <div className='lg:mt-[100px] xl:mr-[-110px]'
          data-aos="fade-left" data-aos-duration="1500">
           <Image
             src={homeMainImg}

@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>   
       <Navbar />
-      <MainHome />
+      <MainHome /> 
       <About/>
       <Menu/>
       <Contact_And_Footer />

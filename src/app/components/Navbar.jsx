@@ -52,7 +52,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleShadow = () => {
-      setShadow(window.scrollY >= 90);
+      setShadow(window.scrollY >= 5);
     };
     window.addEventListener('scroll', handleShadow);
     return () => {
@@ -68,7 +68,7 @@ const Navbar = () => {
   }, [handleScroll]);
 
   return (
-    <div className={shadow ? 'fixed w-full h-20 shadow-lg z-[100] bg-[#F2DAAB]' : 'fixed w-full h-20 z-[100] '}>
+    <div className={`fixed w-full h-20 z-[100] navbar ${shadow ? 'navbar-shadow' : ''}`}>
       <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16">
         <div className='lg:ml-[70px] cursor-pointer'>
           <button onClick={() => handleNavClick('home')}>
@@ -76,96 +76,62 @@ const Navbar = () => {
             <Image src={logoImg} alt='logo' height={85} width={85} data-aos="fade-right" data-aos-duration="1500"/>
           </button>
         </div>
-        <div className='font-md text-primary md:mr-[15px]'>
+        <div className='font-md text-primary '>
           <ul className='hidden md:flex flex items-center text-[#53422B]'>
-    
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'home' ? 'font-bold' : ''}`} onClick={() => handleNavClick('home')}>
+            <li className={`cursor-pointer xl:ml-12 lg:ml-8 md:ml-7 text-sm uppercase duration-500 ${activeNavLink === 'home' ? 'font-bold' : ''}`} onClick={() => handleNavClick('home')}>
               Home
             </li>
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'about' ? 'font-bold' : ''}`} onClick={() => handleNavClick('about')}>
+            <li className={`cursor-pointer xl:ml-12 lg:ml-8 md:ml-7 text-sm uppercase duration-500 ${activeNavLink === 'about' ? 'font-bold' : ''}`} onClick={() => handleNavClick('about')}>
               About
             </li>
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'menu' ? 'font-bold' : ''}`} onClick={() => handleNavClick('menu')}>
+            <li className={`cursor-pointer xl:ml-12 lg:ml-8 md:ml-7 text-sm uppercase duration-500 ${activeNavLink === 'menu' ? 'font-bold' : ''}`} onClick={() => handleNavClick('menu')}>
               Menu
             </li>
-            <li className={`cursor-pointer ml-12 text-sm uppercase duration-500 ${activeNavLink === 'contact' ? 'font-bold' : ''}`} onClick={() => handleNavClick('contact')}>
+            <li className={`cursor-pointer xl:ml-12 lg:ml-8 md:ml-7 text-sm uppercase duration-500 ${activeNavLink === 'contact' ? 'font-bold' : ''}`} onClick={() => handleNavClick('contact')}>
               Contact
             </li>
-
-    
-
-         
-            <Link href='/loginpage' 
-            className='border 
-            border-[#53422B] md:ml-[139px] lg:ml-[279px] p-[3.7px] rounded-md 
-            bg-transparent' data-aos="fade-left" data-aos-duration="1500">
+            <Link href='/loginpage' className='text-center border border-[#53422B] md:ml-[129px] lg:ml-[249px] p-[3.7px] rounded-md bg-transparent w-[80px]' data-aos="fade-left" data-aos-duration="1500">
               Sign in
             </Link>
-      
-
-
-            <a href='/signuppage' 
-            className='ml-[9px] lg:mr-[100px]  
-            bg-[#53422B] p-[3.7px] rounded-md 
-            text-white border border-[#53422B]'
-            data-aos="fade-left" data-aos-duration="1500">
+            <Link href='/signuppage' className='text-center ml-[9px] lg:mr-[100px] bg-[#53422B] p-[3.7px] rounded-md text-white border border-[#53422B] w-[80px]' data-aos="fade-left" data-aos-duration="1500">
               Sign up
-            </a>
+            </Link>
           </ul>
-
-          {/* Mobile Responsive */}
-          <div onClick={handleNav} className='md:hidden cursor-pointer'  data-aos="fade-up" data-aos-duration="1500">
-            {nav ?  '' : <AiOutlineMenu size={25}/>} 
+          <div onClick={handleNav} className='md:hidden cursor-pointer' data-aos="fade-up" data-aos-duration="1500">
+            {nav ? '' : <AiOutlineMenu size={25}/>}
           </div>
         </div>
       </div>
       <div className={nav ? "md:hidden fixed right-0 top-0 w-full h-screen" : ""}>
         <div className={nav ? "fixed right-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen p-10 ease-in duration-500" : "fixed right-[-150%] top-0 p-10 ease-in duration-500"}>
-          <div>
-            <div className='flex w-full items-center justify-between cursor-pointer'>
-              <div className='my-2'/>
-              <div onClick={handleNav} className='mr-[-27px] mt-[-17px]'>
-                <AiOutlineClose size={25} />
-              </div>
+          <div className='flex w-full items-center justify-between cursor-pointer'>
+            <div className='my-2'/>
+            <div onClick={handleNav} className='mr-[-27px] mt-[-17px]'>
+              <AiOutlineClose size={25} />
             </div>
           </div>
           <div className='py-4 flex bg-[#FFEDB7] shadow-lg p-7 rounded-xl flex-col'>
             <ul className='uppercase'>
-            
-                <li onClick={() => handleNavClick('home')} className={`text-sm uppercase pt-3 ${activeNavLink === 'home' ? 'font-bold' : ''}`}>
-                  Home
-                </li>
-
-             
-                <li onClick={() => handleNavClick('about')} className={`text-sm uppercase pt-7 ${activeNavLink === 'about' ? 'font-bold' : ''}`}>
-                  About
-                </li>
-         
-         
-                <li onClick={() => handleNavClick('menu')} className={`text-sm uppercase pt-7 ${activeNavLink === 'menu' ? 'font-bold' : ''}`}>
-                  Menu
-                </li>
-             
-            
-                <li onClick={() => handleNavClick('contact')} className={`text-sm uppercase pt-7 ${activeNavLink === 'contact' ? 'font-bold' : ''}`}>
-                  Contact
-                </li>
-           
+              <li onClick={() => handleNavClick('home')} className={`text-sm uppercase pt-3 ${activeNavLink === 'home' ? 'font-bold' : ''}`}>
+                Home
+              </li>
+              <li onClick={() => handleNavClick('about')} className={`text-sm uppercase pt-7 ${activeNavLink === 'about' ? 'font-bold' : ''}`}>
+                About
+              </li>
+              <li onClick={() => handleNavClick('menu')} className={`text-sm uppercase pt-7 ${activeNavLink === 'menu' ? 'font-bold' : ''}`}>
+                Menu
+              </li>
+              <li onClick={() => handleNavClick('contact')} className={`text-sm uppercase pt-7 ${activeNavLink === 'contact' ? 'font-bold' : ''}`}>
+                Contact
+              </li>
               <br />
               <br />
-
-              <Link href='/signup-page'
-              className='border p-[1.5px] 
-              rounded-lg border-black'>
+              <Link href='/signup-page' className='border p-[1.5px] rounded-lg border-black'>
                 Sign up
               </Link>
               <br />
               <br />
-   
-
-              <Link href='/login-page'
-              className='border p-[1.5px] 
-              rounded-lg border-black'>
+              <Link href='/login-page' className='border p-[1.5px] rounded-lg border-black'>
                 Sign in
               </Link>
             </ul>

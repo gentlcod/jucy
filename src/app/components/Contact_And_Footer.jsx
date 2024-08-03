@@ -13,6 +13,8 @@ import { logoImg, mapLocationImg } from '../../../public/assets'
 const Contact_And_Footer = () => {
   return (
     <section id='contact' >
+
+      
       <div className='mt-[120px] py-[30px] lg:pt-[90px] pt-[225px] lg:px-[100px] px-[25px] max-w-[1280px]'>
 
   

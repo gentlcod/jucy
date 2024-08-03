@@ -5,7 +5,7 @@ import { coconutMainImg, pineappleJuiceImg, waterMelonJuiceImg } from '../../../
 
 const About = () => {
   return (
-    <section id='about' className='py-[30px] pt-[90px] lg:px-[100px] px-[25px] max-w-[1280px]'>
+    <section id='about' className='overflow-hidden py-[30px] pt-[-159px] lg:px-[100px] px-[25px] max-w-[1280px]'>
       <div className='flex items-center justify-between'>
         <h4 className='text-5xl text-[#53422B] font-bold mt-[150px] leading-loose'
         data-aos='fade-right'>
@@ -15,7 +15,7 @@ const About = () => {
         </h4>
 
         {/* BOXES */}
-        <div className='flex flex-wrap gap-4 mt-[250px] lg:mr-[-129px]' data-aos="fade-left" data-aos-duration="1500">
+        <div className='flex flex-wrap lg:flex-row gap-5 mt-[220px] lg:mr-[-61px] md:ml-[9rem] xl:pr-0' data-aos="fade-left" data-aos-duration="1500">
           <div className=' w-[150px] h-[200px] flex items-center justify-center rounded-xl bg-gradient-custom shadow-2xl'>
             <Image
               src={pineappleJuiceImg}
