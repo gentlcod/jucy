@@ -1,6 +1,6 @@
 import React from 'react'
 
-const tangerine = () => {
+const basket = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const tangerine = () => {
   )
 }
 
-export default tangerine
+export default basket

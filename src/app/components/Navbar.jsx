@@ -90,15 +90,15 @@ const Navbar = () => {
             <li className={`cursor-pointer xl:ml-12 lg:ml-8 md:ml-7 text-sm uppercase duration-500 ${activeNavLink === 'contact' ? 'font-bold' : ''}`} onClick={() => handleNavClick('contact')}>
               Contact
             </li>
-            <Link href='/loginpage' className='text-center border border-[#53422B] md:ml-[129px] lg:ml-[249px] p-[3.7px] rounded-md bg-transparent w-[80px]' data-aos="fade-left" data-aos-duration="1500">
+            <Link href='/login' className='text-center border border-[#53422B] md:ml-[129px] lg:ml-[249px] p-[3.7px] rounded-md bg-transparent w-[80px]' data-aos="fade-left" data-aos-duration="1500">
               Sign in
             </Link>
-            <Link href='/signuppage' className='text-center ml-[9px] lg:mr-[100px] bg-[#53422B] p-[3.7px] rounded-md text-white border border-[#53422B] w-[80px]' data-aos="fade-left" data-aos-duration="1500">
+            <Link href='/signup' className='text-center ml-[9px] lg:mr-[100px] bg-[#53422B] p-[3.7px] rounded-md text-white border border-[#53422B] w-[80px]' data-aos="fade-left" data-aos-duration="1500">
               Sign up
             </Link>
           </ul>
           <div onClick={handleNav} className='md:hidden cursor-pointer' data-aos="fade-up" data-aos-duration="1500">
-            {nav ? '' : <AiOutlineMenu size={25}/>}
+            {nav ? '' : <AiOutlineMenu style={{color: '#53422B', fontSize: '24px'}}/>}
           </div>
         </div>
       </div>
@@ -107,50 +107,53 @@ const Navbar = () => {
           <div className='flex w-full items-center justify-between cursor-pointer'>
             <div className='my-2'/>
             <div onClick={handleNav} className='mr-[-27px] mt-[-17px]'>
-              <AiOutlineClose size={25} />
+              <AiOutlineClose style={{color: '#53422B', fontSize: '24px'}} />
             </div>
           </div>
           <div className='py-4 flex bg-[#FFEDB7] shadow-lg p-7 rounded-xl flex-col'>
             <ul className='uppercase'>
-              <li onClick={() => handleNavClick('home')} className={`text-sm uppercase pt-3 ${activeNavLink === 'home' ? 'font-bold' : ''}`}>
+              <li onClick={() => handleNavClick('home')} className={`text-[#53422B] cursor-pointer text-sm uppercase pt-3 ${activeNavLink === 'home' ? 'font-bold' : ''}`}>
                 Home
               </li>
-              <li onClick={() => handleNavClick('about')} className={`text-sm uppercase pt-7 ${activeNavLink === 'about' ? 'font-bold' : ''}`}>
+              <li onClick={() => handleNavClick('about')} className={`text-[#53422B] cursor-pointer text-sm uppercase pt-7 ${activeNavLink === 'about' ? 'font-bold' : ''}`}>
                 About
               </li>
-              <li onClick={() => handleNavClick('menu')} className={`text-sm uppercase pt-7 ${activeNavLink === 'menu' ? 'font-bold' : ''}`}>
+              <li onClick={() => handleNavClick('menu')} className={`text-[#53422B] cursor-pointer text-sm uppercase pt-7 ${activeNavLink === 'menu' ? 'font-bold' : ''}`}>
                 Menu
               </li>
-              <li onClick={() => handleNavClick('contact')} className={`text-sm uppercase pt-7 ${activeNavLink === 'contact' ? 'font-bold' : ''}`}>
+              <li onClick={() => handleNavClick('contact')} className={`text-[#53422B] cursor-pointer text-sm uppercase pt-7 ${activeNavLink === 'contact' ? 'font-bold' : ''}`}>
                 Contact
               </li>
               <br />
               <br />
-              <Link href='/signup-page' className='border p-[1.5px] rounded-lg border-black'>
-                Sign up
-              </Link>
-              <br />
-              <br />
-              <Link href='/login-page' className='border p-[1.5px] rounded-lg border-black'>
+              <Link href='/login' className='border text-[#53422B] p-[5px] rounded-lg border-[#53422B]'>
                 Sign in
               </Link>
+
+              <br />
+              <br />
+              <Link href='/signup' className='border p-[5px] bg-[#53422B] text-white rounded-md border-[#53422B]'>
+                Sign up
+              </Link>
+             
             </ul>
             <div className='pt-7'>
               <div className='flex items-center justify-between my-4 w-full sm:w-[80%]'>
                 <div className='p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
                   <button>
-                    <FaTwitter />
+                    <FaTwitter style={{color: '#53422B', fontSize: '21px'}}/>
                   </button>
                 </div>
                 <div className='p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
                   <button>
-                    <FaInstagram />
+                    <FaInstagram style={{color: '#53422B', fontSize: '21px'}}/>
                   </button>
                 </div>
                 <div className='p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
                   <button>
-                    <FaFacebook />
+                    <FaFacebook style={{color: '#53422B', fontSize: '21px'}}/>
                   </button>
+
                 </div>
               </div>
             </div>

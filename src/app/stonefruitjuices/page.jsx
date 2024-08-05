@@ -1,6 +1,6 @@
 import React from 'react'
 
-const lime = () => {
+const stoneFruitJuices = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const lime = () => {
   )
 }
 
-export default lime
+export default stoneFruitJuices

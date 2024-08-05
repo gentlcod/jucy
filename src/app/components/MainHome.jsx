@@ -8,10 +8,7 @@ const MainHome = () => {
   return (
 
     <section id='home' className=' overflow-hidden py-[30px] pt-[90px] lg:px-[100px] px-[25px] max-w-[1280px]'>
-
-  
-
-      
+            
       <div className='lg:mt-0 mt-12 flex items-center justify-between'>
         <h2 className='text-[#53422B] xl:text-5xl text-3xl mb-5 
         lg:mb-0 font-bold lg:mt-[-50px]'
@@ -44,13 +41,14 @@ const MainHome = () => {
       {/* Buttons  */}
       <div className='flex items-center 
       justify-start' data-aos='fade-right'>
-        <Link href='/menu-pages/menu-categories'
+
+        <Link href='/menucategories'
         className='bg-[#53422B] mt-16 px-7 
         p-4 rounded-lg text-white'>
           View Menu
         </Link>
 
-        <Link href='/discount-menu'
+        <Link href='/discount'
         className='bg-transparent 
         border-[1px] border-[#53422B] ml-5 
         mt-16 px-7 p-4 rounded-lg text-[#53422B]'>

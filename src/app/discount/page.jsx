@@ -1,11 +1,11 @@
 import React from 'react'
 
-const lemon = () => {
+const discount = () => {
   return (
     <div>
-      
+      disount
     </div>
   )
 }
 
-export default lemon
+export default discount
