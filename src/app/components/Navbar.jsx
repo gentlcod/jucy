@@ -97,6 +97,8 @@ const Navbar = () => {
               Sign up
             </Link>
           </ul>
+
+          
           <div onClick={handleNav} className='md:hidden cursor-pointer' data-aos="fade-up" data-aos-duration="1500">
             {nav ? '' : <AiOutlineMenu style={{color: '#53422B', fontSize: '24px'}}/>}
           </div>

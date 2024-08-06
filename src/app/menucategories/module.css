@@ -1,0 +1,12 @@
+.sticky-header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .sticky-header-shadow {
+    background-color: #F2DAAB;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }

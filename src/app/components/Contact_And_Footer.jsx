@@ -12,11 +12,9 @@ import { logoImg, mapLocationImg } from '../../../public/assets'
 
 const Contact_And_Footer = () => {
   return (
-    <section id='contact' >
-
+    <section id='contact'>
       
       <div className='mt-[120px] py-[30px] lg:pt-[90px] pt-[225px] lg:px-[100px] px-[25px] max-w-[1280px]'>
-
   
        <h2 className='text-[#53422B] xl:text-5xl text-3xl mb-5 
       lg:mb-0 font-bold lg:mt-[-50px]'
@@ -24,8 +22,7 @@ const Contact_And_Footer = () => {
        Contact Us
       </h2>
 
-      <div className='flex flex-col lg:flex-row items-center gap-9 justify-between lg:w-[1180px]' data-aos="fade-down" data-aos-duration="1500">
-
+      <div className='flex flex-col items-center justify-center xl:flex-row lg:flex-col overflow-hidden items-center  justify-between xl:w-[1180px]' data-aos="fade-down" data-aos-duration="1500">
 
          {/* location  */}
 
@@ -68,9 +65,7 @@ const Contact_And_Footer = () => {
       <p className='ml-3 text-[#53422B] text-sm'>
       Branch 3 link
       </p>
-      </div>
-
-    
+      </div>   
       </div>
 
         {/* send message form  */}
