@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"/>
         </Head>
       <body className={inter.className}>
-        <Preloader />
+        {/* <Preloader /> */}
         <AnimationWrapper>
           {children}
         </AnimationWrapper>

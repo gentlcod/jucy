@@ -12,6 +12,7 @@ import guavaJuiceImg from './guavajuice.png';
 import honeyDewJuiceImg from './honeydew.png';
 import kiwiJuiceImg from './kiwi.png';
 import lemonJuiceImg from './lemonjuice.png';
+import limeJuiceImg from './limejuice.png'
 import lycheeJuiceImg from './lycheejuice.png';
 import homeMainImg from './main.png';
 import mangoJuiceImg from './mango.png';
@@ -48,6 +49,7 @@ export {
     honeyDewJuiceImg,
     kiwiJuiceImg,
     lemonJuiceImg,
+    limeJuiceImg,
     lycheeJuiceImg,
     homeMainImg,
     mangoJuiceImg,
