@@ -75,7 +75,7 @@ const citrusJuices = () => {
 
         {/* Combined Category Boxes */}
         <div className="mb-[2rem] grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-          <Link href="/citrusjuices/orangejuice">
+          <Link href="/citrusjuices/orange">
             <div className="relative w-full h-[375px]">
               {/* Blurred Background */}
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
@@ -113,7 +113,7 @@ const citrusJuices = () => {
             </div>
           </Link>
 
-          <Link href="/citrusjuices/lemonjuice">
+          <Link href="/citrusjuices/lemon">
             <div className="relative w-full h-[375px]">
               {/* Blurred Background */}
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
@@ -151,7 +151,7 @@ const citrusJuices = () => {
             </div>
           </Link>
 
-          <Link href="/citrusjuices/limejuice">
+          <Link href="/citrusjuices/lime">
             <div className="relative w-full h-[375px]">
               {/* Blurred Background */}
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
@@ -190,7 +190,7 @@ const citrusJuices = () => {
             </div>
           </Link>
 
-          <Link href="/citrusjuices/grapefruitjuice">
+          <Link href="/citrusjuices/grapefruit">
             <div className="relative w-full h-[375px]">
               {/* Blurred Background */}
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
@@ -228,7 +228,7 @@ const citrusJuices = () => {
             </div>
           </Link>
 
-          <Link href="/citrusjuices/tangerinejuice">
+          <Link href="/citrusjuices/tangerine">
             <div className="relative w-full h-[375px]">
               {/* Blurred Background */}
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
