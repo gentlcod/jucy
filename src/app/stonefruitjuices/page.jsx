@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import '../menucategories/module.css';
 import { TbBasketPlus } from "react-icons/tb";
-import { blackBerryJuceImg, blueBerryJuiceImg, cranBerryJuiceImg, raspBerryImg, strawBerryImg } from '../../../public/assets';
+import { peachJuiceImg, plumJuiceImg, raspBerryImg } from '../../../public/assets';
 import { PiBasketFill } from 'react-icons/pi';
 import { logoImg } from '../../../public/assets';
 
@@ -64,12 +64,12 @@ const stoneFruitJuices = () => {
          data-aos="fade-down"
          data-aos-duration="1500">
         <h5 className='pb-6 font-medium text-[#53422B] text-2xl'>
-          Berry Juices
+          Stone Fruit Juices
         </h5>
 
         {/* Combined Category Boxes */}
         <div className="mb-[2rem] grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-          <Link href="/berryjuices/strawberry">
+          <Link href="/stonefruitjuices/peach">
             <div className="relative w-full h-[375px]">
               {/* Blurred Background */}
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
@@ -77,8 +77,8 @@ const stoneFruitJuices = () => {
               <div className="absolute inset-0 ml-7">
                 <div className='flex items-center'>
                   <Image
-                    src={strawBerryImg}
-                    alt="strawberry juice"
+                    src={peachJuiceImg}
+                    alt="peach juice"
                     height={165}
                     width={165}
                   />
@@ -90,24 +90,23 @@ const stoneFruitJuices = () => {
               {/* Text */}
               <div className="z-10 absolute top-64 px-10">
                 <h5 className="text-[#473525] text-xl font-bold">
-                  Strawberry
+                  Peach
                 </h5>
                 <p className='text-[#555555] text-xs'>
-                Sweet and slightly tart, packed with
-                 <br /> antioxidants and bursting with fresh
-                 <br /> strawberry flavor.
+                Sweet and fragrant, bursting with the 
+                <br /> flavor of ripe peaches.
                 </p>
                 <p className='pt-1 text-[#555555] text-xl font-semibold '>
                   <span className='text-[#FF4D00] text-sm font-semibold'>
                     $
                   </span>
-                  9.00
+                  11.00
                 </p>
               </div>
             </div>
           </Link>
 
-          <Link href="/berryjuices/blueberry">
+          <Link href="/stonefruitjuices/plum">
   <div className="relative w-full h-[375px]">
     {/* Blurred Background */}
     <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
@@ -115,11 +114,10 @@ const stoneFruitJuices = () => {
     <div className="absolute inset-0 ml-7">
       <div className='flex items-center'>
         <Image
-          src={blueBerryJuiceImg}
-          alt="blueberry juice"
+          src={plumJuiceImg}
+          alt="plum juice"
           height={210}
           width={210}
-          className='transform -scale-x-100'
         />
         <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
           <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
@@ -129,11 +127,11 @@ const stoneFruitJuices = () => {
     {/* Text */}
     <div className="z-10 absolute top-64 px-10">
       <h5 className="text-[#473525] text-xl font-bold">
-        Blueberry
+        Plum
       </h5>
       <p className='text-[#555555] text-xs'>
-        Rich in antioxidants, this juice offers a
-        <br /> sweet and subtly tart flavor.
+      Bright and zesty, perfect for adding a 
+      <br /> refreshing tartness to any drink or dish.
       </p>
       {/* Price Container */}
       <div className="flex items-center gap-2 pt-1">
@@ -158,7 +156,7 @@ const stoneFruitJuices = () => {
          </Link>
 
 
-          <Link href="/berryjuices/raspberry">
+          <Link href="/stonefruitjuices/apricot">
             <div className="relative w-full h-[375px]">
               {/* Blurred Background */}
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
@@ -195,82 +193,15 @@ const stoneFruitJuices = () => {
             </div>
           </Link>
 
-          <Link href="/berryjuices/cranberry">
-            <div className="relative w-full h-[375px]">
-              {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
-              {/* Image */}
-              <div className="absolute inset-0 ml-7">
-                <div className='mt-[1rem] flex items-center'>
-                  <Image
-                    src={cranBerryJuiceImg}
-                    alt="cranberry juice"
-                    height={155}
-                    width={155}
-                  />
-                  <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-                    <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
-                  </div>
-                </div>
-              </div>
-              {/* Text */}
-              <div className="z-10 absolute top-64 px-10">
-                <h5 className="text-[#473525] text-xl font-bold">
-                  Cranberry
-                </h5>
-                <p className='text-[#555555] text-xs'>
-                Tart and invigorating, known for its 
-                 <br /> beneficial effects on urinary tract
-                 <br /> health.
-                </p>
-                <p className='pt-1 text-[#555555] text-xl font-semibold '>
-                  <span className='text-[#FF4D00] text-sm font-semibold'>
-                    $
-                  </span>
-                  8.50
-                </p>
-              </div>
-            </div>
-          </Link>
-
-          <Link href="/berryjuices/blackberry">
-            <div className="relative w-full h-[375px]">
-              {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
-              {/* Image */}
-              <div className="absolute inset-0 ml-7">
-                <div className='mt-[2.1rem] flex items-center'>
-                  <Image
-                    src={blackBerryJuceImg}
-                    alt="blackberry juice"
-                    height={200}
-                    width={200}
-                  />
-                  <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-                    <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
-                  </div>
-                </div>
-              </div>
-              {/* Text */}
-              <div className="z-10 absolute top-64 px-10">
-                <h5 className="text-[#473525] text-xl font-bold">
-                Blackberry
-                </h5>
-                <p className='pt-2 text-[#555555] text-xs'>
-                Deeply flavorful and rich in vitamins
-                <br /> and antioxidants.
-                </p>
-                <p className='pt-2 text-[#555555] text-xl font-semibold '>
-                  <span className='text-[#FF4D00] text-sm font-semibold'>
-                    $
-                  </span>
-                  7.50
-                </p>
-              </div>
-            </div>
-          </Link>
+   
 
         </div>
+
+        <Link href='/menucategories'>
+        <p className='my-6 underline font-medium text-[#53422B]'>
+          Back to menu categories
+        </p>
+        </Link>
       </div>
     </>
   );

@@ -168,8 +168,8 @@ const berryJuices = () => {
                   <Image
                     src={raspBerryImg}
                     alt="raspberry juice"
-                    height={177}
-                    width={177}
+                    height={190}
+                    width={190}
                   />
                   <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
                     <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
@@ -271,6 +271,15 @@ const berryJuices = () => {
           </Link>
 
         </div>
+
+
+        <Link href='/menucategories'>
+        <p className='my-6 underline font-medium text-[#53422B]'>
+          Back to menu categories
+        </p>
+        </Link>
+
+
       </div>
     </>
   );

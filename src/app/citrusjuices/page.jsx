@@ -266,6 +266,14 @@ const citrusJuices = () => {
           </Link>
 
         </div>
+
+        <Link href='/menucategories'>
+        <p className=' my-6 underline font-medium text-[#53422B]'>
+          Back to menu categories
+        </p>
+        </Link>
+
+
       </div>
     </>
   );
