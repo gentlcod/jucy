@@ -5,8 +5,9 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import '../menucategories/module.css';
+import { RiDiscountPercentFill } from "react-icons/ri";
 import { TbBasketPlus } from "react-icons/tb";
-import { blackBerryJuceImg, blueBerryJuiceImg, cantalopeJuiceImg, cranBerryJuiceImg, honeyDewJuiceImg, raspBerryImg, strawBerryImg, waterMelonJuiceImg } from '../../../public/assets';
+import { cantalopeJuiceImg, honeyDewJuiceImg, waterMelonJuiceImg } from '../../../public/assets';
 import { PiBasketFill } from 'react-icons/pi';
 import { logoImg } from '../../../public/assets';
 
@@ -162,6 +163,9 @@ const melonJuices = () => {
                     width={183}
                     className='transform -scale-x-100'
                   />
+                  <div className='absolute top-[-.45rem] left-[-2.7rem]'>
+      <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '65px'}}/>
+        </div>
                   <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
                     <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
                   </div>
