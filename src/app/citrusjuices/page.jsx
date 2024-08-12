@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import '../menucategories/module.css';
+import { IoCheckbox } from "react-icons/io5"; // after the user tap to save a juice to basket, this icon should display 
 import { TbBasketPlus } from "react-icons/tb";
 import {
   grapeFruitJuiceImg,
@@ -14,6 +15,7 @@ import {
   orangeJuiceImg,
   tangerineJuiceImg
 } from '../../../public/assets';
+import { RiDiscountPercentFill } from "react-icons/ri";
 import { PiBasketFill } from 'react-icons/pi';
 
 const citrusJuices = () => {
@@ -165,6 +167,10 @@ const citrusJuices = () => {
                     width={230}
                     className="transform -scale-x-100" // Flip the image horizontally
                   />
+                     <div className='absolute top-[-.45rem] left-[-2.7rem]'>
+                      <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '65px'}}/>
+                        </div>
+
                   <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
                     <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
                   </div>
@@ -180,12 +186,24 @@ const citrusJuices = () => {
                   <br /> vibrant splash of flavor to any
                   <br /> beverage.
                 </p>
-                <p className='pt-1 text-[#555555] text-xl font-semibold '>
-                  <span className='text-[#FF4D00] text-sm font-semibold'>
-                    $
-                  </span>
-                  8.00
-                </p>
+                  {/* Price Container */}
+      <div className="flex items-center gap-2 pt-1">
+        {/* Original Price */}
+        <span className='mt-1 text-[#FF4D00] text-sm font-semibold'>
+            $
+          </span>
+        <p className='ml-[-9px] text-[#555555] opacity-[65%] text-xl font-semibold' style={{ textDecoration: 'line-through', textDecorationColor: 'red' }}>
+         
+          7.50
+        </p>
+        {/* Sale Price */}
+        <p className='text-[#555555] text-xl font-semibold'>
+          <span className='text-[#FF4D00] text-sm font-semibold'>
+            $
+          </span>
+          6.00
+        </p>
+      </div>
               </div>
             </div>
           </Link>

@@ -114,18 +114,20 @@ const tropicalJuices = () => {
             </div>
           </Link>
 
+
+          
           <Link href="/tropicaljuices/mango">
   <div className="relative w-full h-[375px]">
     {/* Blurred Background */}
     <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
     {/* Image */}
     <div className="absolute inset-0 ml-7">
-      <div className='flex items-center'>
+      <div className='mt-[-2.7rem] ml-[-2rem] flex items-center'>
         <Image
           src={mangoJuiceImg}
           alt="mango juice"
-          height={210}
-          width={210}
+          height={255}
+          width={255}
         />
         <div className='absolute top-[-.45rem] left-[-2.7rem]'>
       <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '65px'}}/>
@@ -220,6 +222,9 @@ const tropicalJuices = () => {
                     width={175}
                     className='transform -scale-x-100'
                   />
+                     <div className='absolute top-[-.45rem] left-[-2.7rem]'>
+                    <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '65px'}}/>
+                    </div>
                   <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
                     <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
                   </div>
