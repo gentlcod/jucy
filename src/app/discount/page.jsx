@@ -78,7 +78,7 @@ const discount = () => {
         {/* Combined Category Boxes */}
         <div className="mb-[2rem] grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
 
-        <Link href="/citrusjuices/lime">
+        <Link href="/discount/lime">
             <div className="relative w-full h-[375px]">
               {/* Blurred Background */}
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
@@ -133,7 +133,7 @@ const discount = () => {
             </div>
           </Link>
 
-          <Link href="/berryjuices/blueberry">
+          <Link href="/discount/blueberry">
   <div className="relative w-full h-[375px]">
     {/* Blurred Background */}
     <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>

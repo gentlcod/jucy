@@ -7,7 +7,7 @@ import Link from 'next/link';
 import '../menucategories/module.css';
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { TbBasketPlus } from "react-icons/tb";
-import { peachJuiceImg, plumJuiceImg, raspBerryImg } from '../../../public/assets';
+import { apricotJuiceImg, peachJuiceImg, plumJuiceImg, raspBerryImg } from '../../../public/assets';
 import { PiBasketFill } from 'react-icons/pi';
 import { logoImg } from '../../../public/assets';
 
@@ -76,12 +76,12 @@ const stoneFruitJuices = () => {
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
               {/* Image */}
               <div className="absolute inset-0 ml-7">
-                <div className='flex items-center'>
+                <div className='mt-[1.1rem] flex items-center'>
                   <Image
                     src={peachJuiceImg}
                     alt="peach juice"
-                    height={165}
-                    width={165}
+                    height={150}
+                    width={150}
                   />
                   <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
                     <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
@@ -113,7 +113,7 @@ const stoneFruitJuices = () => {
     <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
     {/* Image */}
     <div className="absolute inset-0 ml-7">
-      <div className='flex items-center'>
+      <div className='mt-[1rem] flex items-center'>
         <Image
           src={plumJuiceImg}
           alt="plum juice"
@@ -166,12 +166,12 @@ const stoneFruitJuices = () => {
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
               {/* Image */}
               <div className="absolute inset-0 ml-7">
-                <div className='mt-[.7rem] flex items-center'>
+                <div className='mt-[1.5rem] flex items-center'>
                   <Image
-                    src={raspBerryImg}
-                    alt="raspberry juice"
-                    height={177}
-                    width={177}
+                    src={apricotJuiceImg}
+                    alt="Apricot juice"
+                    height={190}
+                    width={190}
                   />
                   <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
                     <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
@@ -181,7 +181,7 @@ const stoneFruitJuices = () => {
               {/* Text */}
               <div className="z-10 absolute top-64 px-10">
                 <h5 className="text-[#473525] text-xl font-bold">
-                  Raspberry
+                Apricot
                 </h5>
                 <p className='text-[#555555] text-xs'>
                 Tangy and refreshing, this juice is rich

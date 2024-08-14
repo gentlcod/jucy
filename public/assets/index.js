@@ -20,6 +20,7 @@ import orangeJuiceImg from './orangejuice.png';
 import papayaJuiceImg from './papayajuice.png';
 import passionFruitJuiceImg from './passionfruitjuice.png';
 import peachJuiceImg from './peachjuice.png';
+import apricotJuiceImg from './apricotjuice.png'
 import pineappleJuiceImg from './pineapple.png';
 import plumJuiceImg from './plumjuice.png';
 import sourSopJuiceImg from './soursop.png';
@@ -57,6 +58,7 @@ export {
     papayaJuiceImg,
     passionFruitJuiceImg,
     peachJuiceImg,
+    apricotJuiceImg,
     pineappleJuiceImg,
     plumJuiceImg,
     sourSopJuiceImg,
