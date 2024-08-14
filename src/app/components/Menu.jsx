@@ -101,7 +101,7 @@ const Menu = () => {
 
       <div className='lg:ml-[533px] mt-7'>
       <Link
-      href='/menu-pages/menu-categories'
+      href='/menucategories'
       >
       <button className='rounded-md bg-[#53422B] text-white py-4 px-7 xl:ml-0 ml-[3rem]'
       data-aos="zoom-in" data-aos-duration="1500">
