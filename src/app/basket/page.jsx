@@ -11,9 +11,8 @@ import { useAuth } from '../contexts/authContext';
 const Basket = () => {
   const [nav, setNav] = useState(false);
   const [shadow, setShadow] = useState(false);
+  const [basketItems, setBasketItems] = useState([]);
   const { user = null, logout = () => window.location.href = '/' } = useAuth() || {};
-
-  const handleNav = () => setNav(prev => !prev);
 
   useEffect(() => {
     const handleShadow = () => {
@@ -25,6 +24,45 @@ const Basket = () => {
       window.removeEventListener('scroll', handleShadow);
     };
   }, []);
+
+  useEffect(() => {
+    // Retrieve basket items from local storage if the user is not authenticated
+    if (!user) {
+      const storedBasket = JSON.parse(localStorage.getItem('basket')) || [];
+      setBasketItems(storedBasket);
+    } else {
+      // Fetch basket items from backend for authenticated user
+      fetchBasketItemsForUser(user.email);
+    }
+  }, [user]);
+
+  const fetchBasketItemsForUser = async (email) => {
+    // Fetch basket items from your backend based on the user email
+    const response = await fetch(`/api/basket?email=${email}`);
+    const items = await response.json();
+    setBasketItems(items);
+  };
+
+  const handleAddToBasket = (item) => {
+    const updatedBasket = [...basketItems, item];
+    setBasketItems(updatedBasket);
+
+    if (user) {
+      // Save to backend for authenticated users
+      fetch('/api/basket', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: user.email, item }),
+      });
+    } else {
+      // Save to local storage for non-authenticated users
+      localStorage.setItem('basket', JSON.stringify(updatedBasket));
+    }
+  };
+
+  const handleNav = () => setNav(prev => !prev);
 
   return (
     <div className='overflow-hidden'>
@@ -125,15 +163,28 @@ const Basket = () => {
       </div>
 
       <div className='lg:mt-0 mt-[3.5rem] pt-48 lg:px-0 px-[3rem] mb-2 flex items-center text-center justify-center' data-aos='fade-up'>
-        <p className='text-[#53422B]'>
-          Your basket is empty, please check the menu
-          <br /> and add a juice to the basket.
-        </p>
+        {basketItems.length === 0 ? (
+          <p className='text-[#53422B]'>
+            Your basket is empty, please check the menu
+            <br /> and add a juice to the basket.
+          </p>
+        ) : (
+          <div className='text-left'>
+            <h3 className='text-[#53422B] font-bold mb-4'>Your Basket:</h3>
+            <ul>
+              {basketItems.map((item, index) => (
+                <li key={index} className='text-[#53422B] mb-2'>
+                  {item.name} - ${item.price}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       <div className='flex justify-center lg:px-0 px-[3rem]' data-aos='fade-up'>
-        <Link href='/menucategories' className='text-[#53422B] font-bold'>
-          Click Here To Explore Menu
+        <Link href="/menucategories">
+          <button className="bg-[#53422B] text-white p-3 rounded-md">Continue Shopping</button>
         </Link>
       </div>
     </div>

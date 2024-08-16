@@ -114,7 +114,7 @@ const Coconut = () => {
 
 
 
-<div className='mt-[3.5rem] flex items-center justify-between flex-col lg:flex-row'>
+           <div className='mt-[3.5rem] flex items-center justify-between flex-col lg:flex-row'>
               <h3 className='mb-4 text-[#53422B] text-xl'>
                 Price : 
               </h3>

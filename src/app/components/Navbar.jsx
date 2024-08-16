@@ -126,16 +126,16 @@ const Navbar = () => {
           </div>
           <div className='py-4 flex bg-[#FFEDB7] shadow-lg p-7 rounded-xl flex-col'>
             <ul className='uppercase'>
-              <li onClick={() => handleNavClick('home')} className={`text-[#53422B] cursor-pointer text-sm uppercase pt-3 ${activeNavLink === 'home' ? 'font-bold' : ''}`}>
+              <li onClick={() => handleNavClick('home')} className={`text-center text-[#53422B] cursor-pointer text-sm uppercase pt-3 ${activeNavLink === 'home' ? 'font-bold' : ''}`}>
                 Home
               </li>
-              <li onClick={() => handleNavClick('about')} className={`text-[#53422B] cursor-pointer text-sm uppercase pt-7 ${activeNavLink === 'about' ? 'font-bold' : ''}`}>
+              <li onClick={() => handleNavClick('about')} className={`text-center text-[#53422B] cursor-pointer text-sm uppercase pt-7 ${activeNavLink === 'about' ? 'font-bold' : ''}`}>
                 About
               </li>
-              <li onClick={() => handleNavClick('menu')} className={`text-[#53422B] cursor-pointer text-sm uppercase pt-7 ${activeNavLink === 'menu' ? 'font-bold' : ''}`}>
+              <li onClick={() => handleNavClick('menu')} className={`text-center text-[#53422B] cursor-pointer text-sm uppercase pt-7 ${activeNavLink === 'menu' ? 'font-bold' : ''}`}>
                 Menu
               </li>
-              <li onClick={() => handleNavClick('contact')} className={`text-[#53422B] cursor-pointer text-sm uppercase pt-7 ${activeNavLink === 'contact' ? 'font-bold' : ''}`}>
+              <li onClick={() => handleNavClick('contact')} className={`text-center text-[#53422B] cursor-pointer text-sm uppercase pt-7 ${activeNavLink === 'contact' ? 'font-bold' : ''}`}>
                 Contact
               </li>
               {user ? (
@@ -147,10 +147,10 @@ const Navbar = () => {
                 </div>
               ) : (
                 <>
-                  <Link href='/login' className='text-center border border-[#53422B] bg-transparent p-[3.7px] rounded-md w-full mb-4 block text-center' data-aos="fade-left" data-aos-duration="1500">
+                  <Link href='/login' className='my-4 border border-[#53422B] bg-transparent p-[.79px] rounded-md w-full mb-4 block text-center' data-aos="fade-left" data-aos-duration="1500">
                     Sign in
                   </Link>
-                  <Link href='/signup' className='text-center bg-[#53422B] p-[3.7px] rounded-md text-white border border-[#53422B] w-full block text-center' data-aos="fade-left" data-aos-duration="1500">
+                  <Link href='/signup' className='my-4 bg-[#53422B] p-[.79px] rounded-md text-white border border-[#53422B] w-full block text-center' data-aos="fade-left" data-aos-duration="1500">
                     Sign up
                   </Link>
                 </>
