@@ -1,5 +1,4 @@
 import Navbar from "./components/Navbar";
-
 import MainHome from "./components/MainHome";
 import About from "./components/About";
 import Menu from "./components/Menu";

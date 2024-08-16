@@ -1,4 +1,5 @@
 // src/contexts/AuthContext.js
+'use client'
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth';

@@ -7,11 +7,13 @@ import Link from 'next/link';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import { logoImg } from '../../../public/assets';
+import { useAuth } from '../contexts/authContext';
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const [shadow, setShadow] = useState(false);
   const [activeNavLink, setActiveNavLink] = useState('home');
+  const { user = null, logout = () => {} } = useAuth() || {};
 
   const handleNav = () => setNav(prev => !prev);
 
@@ -76,7 +78,7 @@ const Navbar = () => {
             <Image src={logoImg} alt='logo' height={85} width={85} data-aos="fade-right" data-aos-duration="1500"/>
           </button>
         </div>
-        <div className='font-md text-primary '>
+        <div className='font-md text-primary'>
           <ul className='hidden md:flex flex items-center text-[#53422B]'>
             <li className={`cursor-pointer xl:ml-12 lg:ml-8 md:ml-7 text-sm uppercase duration-500 ${activeNavLink === 'home' ? 'font-bold' : ''}`} onClick={() => handleNavClick('home')}>
               Home
@@ -90,24 +92,34 @@ const Navbar = () => {
             <li className={`cursor-pointer xl:ml-12 lg:ml-8 md:ml-7 text-sm uppercase duration-500 ${activeNavLink === 'contact' ? 'font-bold' : ''}`} onClick={() => handleNavClick('contact')}>
               Contact
             </li>
-            <Link href='/login' className='text-center border border-[#53422B] md:ml-[129px] lg:ml-[249px] p-[3.7px] rounded-md bg-transparent w-[80px]' data-aos="fade-left" data-aos-duration="1500">
-              Sign in
-            </Link>
-            <Link href='/signup' className='text-center ml-[9px] lg:mr-[100px] bg-[#53422B] p-[3.7px] rounded-md text-white border border-[#53422B] w-[80px]' data-aos="fade-left" data-aos-duration="1500">
-              Sign up
-            </Link>
+            {user ? (
+              <div className='ml-[19rem] flex items-center'>
+                <span className='text-[#53422B] mr-4'>{user.email}</span>
+                <button onClick={logout} className='bg-red-500 text-white px-4 py-2 rounded-md'>
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link href='/login' className='text-center border border-[#53422B] md:ml-[129px] lg:ml-[249px] p-[3.7px] rounded-md bg-transparent w-[80px]' data-aos="fade-left" data-aos-duration="1500">
+                  Sign in
+                </Link>
+                <Link href='/signup' className='text-center ml-[9px] lg:mr-[100px] bg-[#53422B] p-[3.7px] rounded-md text-white border border-[#53422B] w-[80px]' data-aos="fade-left" data-aos-duration="1500">
+                  Sign up
+                </Link>
+              </>
+            )}
           </ul>
 
-          
           <div onClick={handleNav} className='md:hidden cursor-pointer' data-aos="fade-up" data-aos-duration="1500">
-            {nav ? '' : <AiOutlineMenu style={{color: '#53422B', fontSize: '24px'}}/>}
+            {nav ? '' : <AiOutlineMenu style={{color: '#53422B', fontSize: '24px'}} />}
           </div>
         </div>
       </div>
       <div className={nav ? "md:hidden fixed right-0 top-0 w-full h-screen" : ""}>
         <div className={nav ? "fixed right-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen p-10 ease-in duration-500" : "fixed right-[-150%] top-0 p-10 ease-in duration-500"}>
           <div className='flex w-full items-center justify-between cursor-pointer'>
-            <div className='my-2'/>
+            <div className='my-2' />
             <div onClick={handleNav} className='mr-[-27px] mt-[-17px]'>
               <AiOutlineClose style={{color: '#53422B', fontSize: '24px'}} />
             </div>
@@ -126,44 +138,34 @@ const Navbar = () => {
               <li onClick={() => handleNavClick('contact')} className={`text-[#53422B] cursor-pointer text-sm uppercase pt-7 ${activeNavLink === 'contact' ? 'font-bold' : ''}`}>
                 Contact
               </li>
-              <br />
-              <br />
-              <Link href='/login' className='border text-[#53422B] p-[5px] rounded-lg border-[#53422B]'>
-                Sign in
-              </Link>
-
-              <br />
-              <br />
-              <Link href='/signup' className='border p-[5px] bg-[#53422B] text-white rounded-md border-[#53422B]'>
-                Sign up
-              </Link>
-             
+              {user ? (
+                <div className='flex flex-col items-start pt-7'>
+                  <span className='text-[#53422B] mb-4' style={{textTransform: 'none'}}>{user.email}</span>
+                  <button onClick={logout} className='bg-red-500 text-white px-4 py-2 rounded-md'>
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <Link href='/login' className='text-center border border-[#53422B] bg-transparent p-[3.7px] rounded-md w-full mb-4 block text-center' data-aos="fade-left" data-aos-duration="1500">
+                    Sign in
+                  </Link>
+                  <Link href='/signup' className='text-center bg-[#53422B] p-[3.7px] rounded-md text-white border border-[#53422B] w-full block text-center' data-aos="fade-left" data-aos-duration="1500">
+                    Sign up
+                  </Link>
+                </>
+              )}
             </ul>
-            <div className='pt-7'>
-              <div className='flex items-center justify-between my-4 w-full sm:w-[80%]'>
-                <div className='p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
-                  <button>
-                    <FaTwitter style={{color: '#53422B', fontSize: '21px'}}/>
-                  </button>
-                </div>
-                <div className='p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
-                  <button>
-                    <FaInstagram style={{color: '#53422B', fontSize: '21px'}}/>
-                  </button>
-                </div>
-                <div className='p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
-                  <button>
-                    <FaFacebook style={{color: '#53422B', fontSize: '21px'}}/>
-                  </button>
-
-                </div>
-              </div>
+            <div className='flex justify-around py-2 text-[#53422B]'>
+              <FaFacebook />
+              <FaTwitter />
+              <FaInstagram />
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Navbar;

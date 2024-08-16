@@ -4,6 +4,7 @@ import Preloader from './components/Preloader';
 import AnimationWrapper from './components/AnimationWrapper';
 import './styles/globals.css';
 import Head from 'next/head';
+import { AuthProvider } from './contexts/authContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,10 +22,12 @@ export default function RootLayout({ children }) {
           rel="stylesheet"/>
         </Head>
       <body className={inter.className}>
+      <AuthProvider>
         <Preloader />
         <AnimationWrapper>
           {children}
         </AnimationWrapper>
+      </AuthProvider>
       </body>
     </html>
   );
