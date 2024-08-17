@@ -187,7 +187,7 @@ const discount = () => {
          </Link>
 
 
-         <Link href="/tropicaljuices/mango">
+         <Link href="discount/mango">
   <div className="relative w-full h-[375px]">
     {/* Blurred Background */}
     <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
@@ -242,7 +242,7 @@ const discount = () => {
 
 
 
-         <Link href="/tropicaljuices/passionfruit">
+         <Link href="/discount/passionfruit">
             <div className="relative w-full h-[375px]">
               {/* Blurred Background */}
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
@@ -295,7 +295,7 @@ const discount = () => {
             </div>
           </Link>
 
-          <Link href="/exoticjuices/lychee">
+          <Link href="/discount/lychee">
   <div className="relative w-full h-[375px]">
     {/* Blurred Background */}
     <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
@@ -351,7 +351,7 @@ const discount = () => {
          </Link>
 
 
-         <Link href="/melonjuices/honeydew">
+         <Link href="/discount/honeydew">
             <div className="relative w-full h-[375px]">
               {/* Blurred Background */}
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>

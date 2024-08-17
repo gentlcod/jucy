@@ -77,9 +77,9 @@ const Lime = () => {
           <h5 className='pb-6 font-medium text-[#53422B] text-2xl'>
             Lime Juice
           </h5>
-          <div className='absolute lg:top-1 lg:right-64 right-12 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3 cursor-pointer'>
+          {/* <div className='absolute lg:top-1 lg:right-64 right-12 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3 cursor-pointer'>
             <TbBasketPlus style={{ color: '#fff', fontSize: '24px' }} />
-          </div>
+          </div> */}
         </div>
 
         {/* PRODUCT IMAGE  */}

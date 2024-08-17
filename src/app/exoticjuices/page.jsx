@@ -8,14 +8,16 @@ import '../menucategories/module.css';
 import { TbBasketPlus } from "react-icons/tb";
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { PiBasketFill } from 'react-icons/pi';
+import { IoCheckbox } from "react-icons/io5"; // Import the IoCheckbox icon
 import { logoImg, coconutMainImg, dragonFruitJuiceImg, kiwiJuiceImg, lycheeJuiceImg, sourSopJuiceImg, tamaringJuiceImg } from '../../../public/assets';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
-import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const exoticJuices = () => {
   const [shadow, setShadow] = useState(false);
   const [user, setUser] = useState(null);
+  const [addedItems, setAddedItems] = useState([]); // State to track added items
 
   useEffect(() => {
     const handleShadow = () => {
@@ -51,6 +53,8 @@ const exoticJuices = () => {
         quantity: 1, // default quantity
         timestamp: new Date(),
       });
+
+      setAddedItems([...addedItems, item.name]); // Add the item name to the addedItems state
       alert(`${item.name} added to basket!`);
     } catch (error) {
       console.error("Error adding item to basket: ", error);
@@ -139,13 +143,17 @@ const exoticJuices = () => {
                       className={item.name === 'Lychee' || item.name === 'Tamarind' ? 'flip-image' : ''}
                     />
                     <div className="absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3">
-                      <TbBasketPlus
-                        style={{ color: '#fff', fontSize: '24px' }}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          addToBasket(item);
-                        }}
-                      />
+                      {addedItems.includes(item.name) ? (
+                        <IoCheckbox style={{ color: '#fff', fontSize: '24px' }} /> // Display IoCheckbox if the item is added
+                      ) : (
+                        <TbBasketPlus
+                          style={{ color: '#fff', fontSize: '24px' }}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            addToBasket(item);
+                          }}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
