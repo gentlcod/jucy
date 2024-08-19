@@ -17,9 +17,14 @@ import {
 } from '../../../public/assets';
 import { RiDiscountPercentFill } from "react-icons/ri";
 import { PiBasketFill } from 'react-icons/pi';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const citrusJuices = () => {
   const [shadow, setShadow] = useState(false);
+  const [user, setUser] = useState(null);
+  const [addedItems, setAddedItems] = useState([]); // State to track added items
 
   useEffect(() => {
     const handleShadow = () => {
@@ -31,6 +36,72 @@ const citrusJuices = () => {
       window.removeEventListener('scroll', handleShadow);
     };
   }, []);
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser); // Set the user state when authenticated
+    });
+  }, []);
+
+  const addToBasket = async (item) => {
+    if (!user) {
+      alert("Please sign in to add items to the basket.");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, 'basket'), {
+        uid: user.uid, // Store the user's unique ID with the basket item
+        name: item.name,
+        price: item.price,
+        imageUrl: item.imageUrl,
+        description: item.description,
+        quantity: 1, // default quantity
+        timestamp: new Date(),
+      });
+
+      setAddedItems([...addedItems, item.name]); // Add the item name to the addedItems state
+      alert(`${item.name} added to basket!`);
+    } catch (error) {
+      console.error("Error adding item to basket: ", error);
+    }
+  };
+
+  const items = [
+    {
+      name: 'Orange',
+      price: 7.00,
+      imageUrl: orangeJuiceImg,
+      description: 'A classic favorite, rich in vitamin C and bursting with refreshing, tangy-sweet flavor.',
+    },
+    {
+      name: 'Lemon',
+      price: 7.00,
+      imageUrl: lemonJuiceImg,
+      description: 'Bright and zesty, perfect for adding a refreshing tartness to any drink or dish.',
+    },
+    {
+      name: 'Lime',
+      originalPrice: 7.50,
+      price: 6.00,
+      imageUrl: limeJuiceImg,
+      hasDiscount: true,
+      description: 'Tart and aromatic, an excellent source of vitamin C, perfect for refreshing summer drinks.',
+    },
+    {
+      name: 'Tangerine',
+      price: 7.50,
+      imageUrl: tangerineJuiceImg,
+      description: 'Sweet and tangy, full of flavor, perfect for a refreshing drink on a hot day.',
+    },
+    {
+      name: 'Grapefruit',
+      price: 8.00,
+      imageUrl: grapeFruitJuiceImg,
+      description: 'Bitter and tangy, loaded with antioxidants, and perfect for a refreshing drink.',
+    },
+  ];
 
   return (
     <>
@@ -77,220 +148,68 @@ const citrusJuices = () => {
 
         {/* Combined Category Boxes */}
         <div className="mb-[2rem] grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-          <Link href="/citrusjuices/orange">
-            <div className="relative w-full h-[375px]">
-              {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
-              {/* Image */}
-              <div className="absolute inset-0 ml-7">
-                <div className='mt-[1rem] flex items-center'>
-                  <Image
-                    src={orangeJuiceImg}
-                    alt="orange juice"
-                    height={140}
-                    width={140}
-                  />
-                  <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-                    <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
+          {items.map((item, index) => (
+            <div key={index} className="relative w-full h-[375px]">
+              <Link href={`/citrusjuices/${item.name.toLowerCase().replace(' ', '')}`}>
+                {/* Blurred Background */}
+                <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
+                {/* Image */}
+                <div className="absolute inset-0 ml-7">
+                  <div className="mt-[1rem] flex items-center">
+                    <Image
+                      src={item.imageUrl}
+                      alt={`${item.name} juice`}
+                      height={165} 
+                      width={165} 
+                      className={item.name === 'Lime' ? 'flip-image' : ''}
+
+                    />
+                    <div className="absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3">
+                      {addedItems.includes(item.name) ? (
+                        <IoCheckbox style={{ color: '#fff', fontSize: '24px' }} /> // Display IoCheckbox if the item is added
+                      ) : (
+                        <TbBasketPlus
+                          style={{ color: '#fff', fontSize: '24px' }}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            addToBasket(item);
+                          }}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
               {/* Text */}
               <div className="z-10 absolute top-64 px-10">
-                <h5 className="text-[#473525] text-xl font-bold">
-                  Orange
-                </h5>
-                <p className='text-[#555555] text-xs'>
-                  A classic favorite, rich in vitamin C
-                  <br /> and bursting with refreshing,
-                  <br /> tangy-sweet flavor.
-                </p>
-                <p className='pt-1 text-[#555555] text-xl font-semibold '>
-                  <span className='text-[#FF4D00] text-sm font-semibold'>
-                    $
-                  </span>
-                  7.00
-                </p>
-              </div>
-            </div>
-          </Link>
-
-          <Link href="/citrusjuices/lemon">
-            <div className="relative w-full h-[375px]">
-              {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
-              {/* Image */}
-              <div className="absolute inset-0 ml-7">
-                <div className='flex mt-[1.9rem] items-center'>
-                  <Image
-                    src={lemonJuiceImg}
-                    alt="lemon juice"
-                    height={210}
-                    width={210}
-                  />
-                  <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-                    <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
-                  </div>
+                <h5 className="text-[#473525] text-xl font-bold">{item.name}</h5>
+                <p className="text-[#555555] text-xs">{item.description}</p>
+                <div className="flex items-center">
+                   {/* Displaying the original price with a red line for discounted items */}
+                   {item.hasDiscount && (
+                    <p className="text-md font-semibold line-through mr-2 text-[#555555] opacity-[75%] flex items-center">
+                      <span className='text-red-500'>$</span>{item.originalPrice.toFixed(2)}
+                    </p>
+                  )}
+                  <p className="text-[#555555] text-xl font-semibold flex items-center">
+                    <span className='text-[#FF4D00]'>$</span>{item.price.toFixed(2)}
+                  </p>
                 </div>
               </div>
-              {/* Text */}
-              <div className="z-10 absolute top-64 px-10">
-                <h5 className="text-[#473525] text-xl font-bold">
-                  Lemon
-                </h5>
-                <p className='text-[#555555] text-xs'>
-                  Bright and zesty, perfect for adding 
-                  <br />a refreshing tartness to any
-                  <br /> drink or dish.
-                </p>
-                <p className='pt-1 text-[#555555] text-xl font-semibold '>
-                  <span className='text-[#FF4D00] text-sm font-semibold'>
-                    $
-                  </span>
-                  7.00
-                </p>
-              </div>
-            </div>
-          </Link>
 
-          <Link href="/citrusjuices/lime">
-            <div className="relative w-full h-[375px]">
-              {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
-              {/* Image */}
-              <div className="absolute inset-0 ml-7">
-                <div className='mt-[.7rem] flex items-center'>
-                  <Image
-                    src={limeJuiceImg}
-                    alt="lime juice"
-                    height={230}
-                    width={230}
-                    className="transform -scale-x-100" // Flip the image horizontally
-                  />
-                     <div className='absolute top-[-.45rem] left-[-2.7rem]'>
-                      <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '65px'}}/>
-                        </div>
-
-                  <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-                    <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
-                  </div>
+              {/* Discount Icon for Discounted Items */}
+              {item.hasDiscount && (
+                <div className="absolute top-1 left-1">
+                  <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '65px'}}/>
                 </div>
-              </div>
-              {/* Text */}
-              <div className="z-10 absolute top-64 px-10">
-                <h5 className="text-[#473525] text-xl font-bold">
-                  Lime
-                </h5>
-                <p className='text-[#555555] text-xs'>
-                  Crisp and tangy, this juice adds a
-                  <br /> vibrant splash of flavor to any
-                  <br /> beverage.
-                </p>
-                  {/* Price Container */}
-      <div className="flex items-center gap-2 pt-1">
-        {/* Original Price */}
-        <span className='mt-1 text-[#FF4D00] text-sm font-semibold'>
-            $
-          </span>
-        <p className='ml-[-9px] text-[#555555] opacity-[65%] text-xl font-semibold' style={{ textDecoration: 'line-through', textDecorationColor: 'red' }}>
-         
-          7.50
-        </p>
-        {/* Sale Price */}
-        <p className='text-[#555555] text-xl font-semibold'>
-          <span className='text-[#FF4D00] text-sm font-semibold'>
-            $
-          </span>
-          6.00
-        </p>
-      </div>
-              </div>
+              )}
             </div>
-          </Link>
-
-          <Link href="/citrusjuices/grapefruit">
-            <div className="relative w-full h-[375px]">
-              {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
-              {/* Image */}
-              <div className="absolute inset-0 ml-7">
-                <div className='mt-[1rem] flex items-center'>
-                  <Image
-                    src={grapeFruitJuiceImg}
-                    alt="grape fruit juice"
-                    height={185}
-                    width={185}
-                  />
-                  <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-                    <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
-                  </div>
-                </div>
-              </div>
-              {/* Text */}
-              <div className="z-10 absolute top-64 px-10">
-                <h5 className="text-[#473525] text-xl font-bold">
-                  Grapefruit
-                </h5>
-                <p className='text-[#555555] text-xs'>
-                  A bold, tangy juice with a hint of
-                  <br /> sweetness, great for a refreshing
-                  <br /> pick-me-up.
-                </p>
-                <p className='pt-1 text-[#555555] text-xl font-semibold '>
-                  <span className='text-[#FF4D00] text-sm font-semibold'>
-                    $
-                  </span>
-                  8.50
-                </p>
-              </div>
-            </div>
-          </Link>
-
-          <Link href="/citrusjuices/tangerine">
-            <div className="relative w-full h-[375px]">
-              {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
-              {/* Image */}
-              <div className="absolute inset-0 ml-7">
-                <div className='mt-[2.1rem] flex items-center'>
-                  <Image
-                    src={tangerineJuiceImg}
-                    alt="tangerine juice"
-                    height={210}
-                    width={210}
-                  />
-                  <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-                    <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
-                  </div>
-                </div>
-              </div>
-              {/* Text */}
-              <div className="z-10 absolute top-64 px-10">
-                <h5 className="text-[#473525] text-xl font-bold">
-                  Tangerine
-                </h5>
-                <p className='pt-2 text-[#555555] text-xs'>
-                  Sweet and tangy, with a delightful
-                  <br /> burst of citrus flavor.
-                </p>
-                <p className='pt-2 text-[#555555] text-xl font-semibold '>
-                  <span className='text-[#FF4D00] text-sm font-semibold'>
-                    $
-                  </span>
-                  7.50
-                </p>
-              </div>
-            </div>
-          </Link>
-
+          ))}
         </div>
 
         <Link href='/menucategories'>
-        <p className=' my-6 underline font-medium text-[#53422B]'>
-          Back to menu categories
-        </p>
+          <p className='my-6 underline font-medium text-[#53422B]'>Back to menu categories</p>
         </Link>
-
 
       </div>
     </>

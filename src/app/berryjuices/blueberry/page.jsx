@@ -89,6 +89,7 @@ const Blueberry = () => {
             height={300}
             width={300}
             alt='Blueberry Juice'
+            className='transform -scale-x-100'
           />
 
           {/* DESCRIPTION OF THE PRODUCT */}

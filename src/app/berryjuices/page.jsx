@@ -10,9 +10,15 @@ import { TbBasketPlus } from "react-icons/tb";
 import { blackBerryJuceImg, blueBerryJuiceImg, cranBerryJuiceImg, raspBerryImg, strawBerryImg } from '../../../public/assets';
 import { PiBasketFill } from 'react-icons/pi';
 import { logoImg } from '../../../public/assets';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { IoCheckbox } from "react-icons/io5"; // Import IoCheckbox
 
 const berryJuices = () => {
   const [shadow, setShadow] = useState(false);
+  const [user, setUser] = useState(null);
+  const [addedItems, setAddedItems] = useState([]); // State to track added items
 
   useEffect(() => {
     const handleShadow = () => {
@@ -24,6 +30,72 @@ const berryJuices = () => {
       window.removeEventListener('scroll', handleShadow);
     };
   }, []);
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser); // Set the user state when authenticated
+    });
+  }, []);
+
+  const addToBasket = async (item) => {
+    if (!user) {
+      alert("Please sign in to add items to the basket.");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, 'basket'), {
+        uid: user.uid,
+        name: item.name,
+        price: item.price,
+        imageUrl: item.imageUrl,
+        description: item.description,
+        quantity: 1,
+        timestamp: new Date(),
+      });
+
+      setAddedItems([...addedItems, item.name]); // Add the item name to the addedItems state
+      alert(`${item.name} added to basket!`);
+    } catch (error) {
+      console.error("Error adding item to basket: ", error);
+    }
+  };
+
+  const items = [
+    {
+      name: 'Strawberry',
+      price: 9.00,
+      imageUrl: strawBerryImg,
+      description: 'Sweet and slightly tart, packed with antioxidants and bursting with fresh strawberry flavor.',
+    },
+    {
+      name: 'Blueberry',
+      price: 8.00,
+      originalPrice: 10.00,
+      imageUrl: blueBerryJuiceImg,
+      hasDiscount: true,
+      description: 'Rich in antioxidants, this juice offers a sweet and subtly tart flavor.',
+    },
+    {
+      name: 'Raspberry',
+      price: 11.00,
+      imageUrl: raspBerryImg,
+      description: 'Tangy and refreshing, this juice is rich in antioxidants and vibrant flavor.',
+    },
+    {
+      name: 'Cranberry',
+      price: 8.50,
+      imageUrl: cranBerryJuiceImg,
+      description: 'Tart and invigorating, known for its beneficial effects on urinary tract health.',
+    },
+    {
+      name: 'Blackberry',
+      price: 10.00,
+      imageUrl: blackBerryJuceImg,
+      description: 'Sweet and juicy, rich in vitamins and antioxidants.',
+    },
+  ];
 
   return (
     <>
@@ -70,219 +142,69 @@ const berryJuices = () => {
 
         {/* Combined Category Boxes */}
         <div className="mb-[2rem] grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-          <Link href="/berryjuices/strawberry">
-            <div className="relative w-full h-[375px]">
+          {items.map((item, index) => (
+            <div key={index} className="relative w-full h-[375px]">
+              <Link href={`/berryjuices/${item.name.toLowerCase().replace(' ', '')}`}>
               {/* Blurred Background */}
               <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
               {/* Image */}
               <div className="absolute inset-0 ml-7">
                 <div className='flex items-center'>
                   <Image
-                    src={strawBerryImg}
-                    alt="strawberry juice"
+                    src={item.imageUrl}
+                    alt={`${item.name} juice`}
                     height={165}
                     width={165}
+                    className={item.name === 'Blueberry' ? 'flip-image' : ''}
                   />
                   <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-                    <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
+                    {addedItems.includes(item.name) ? (
+                      <IoCheckbox style={{ color: '#fff', fontSize: '24px' }} /> // Display IoCheckbox if the item is added
+                    ) : (
+                      <TbBasketPlus
+                        style={{ color: '#fff', fontSize: '24px' }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          addToBasket(item);
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
+            </Link>
               {/* Text */}
               <div className="z-10 absolute top-64 px-10">
-                <h5 className="text-[#473525] text-xl font-bold">
-                  Strawberry
-                </h5>
+                <h5 className="text-[#473525] text-xl font-bold">{item.name}</h5>
                 <p className='text-[#555555] text-xs'>
-                Sweet and slightly tart, packed with
-                 <br /> antioxidants and bursting with fresh
-                 <br /> strawberry flavor.
+                  {item.description}
                 </p>
-                <p className='pt-1 text-[#555555] text-xl font-semibold '>
-                  <span className='text-[#FF4D00] text-sm font-semibold'>
-                    $
-                  </span>
-                  9.00
-                </p>
-              </div>
-            </div>
-          </Link>
-
-          <Link href="/berryjuices/blueberry">
-  <div className="relative w-full h-[375px]">
-    {/* Blurred Background */}
-    <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
-    {/* Image */}
-    <div className="absolute inset-0 ml-7">
-      <div className='flex items-center'>
-        <Image
-          src={blueBerryJuiceImg}
-          alt="blueberry juice"
-          height={210}
-          width={210}
-          className='transform -scale-x-100'
-        />
-        <div className='absolute top-[-.45rem] left-[-2.7rem]'>
-      <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '65px'}}/>
-        </div>
-        <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-          <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
-        </div>
-      </div>
-    </div>
-    {/* Text */}
-    <div className="z-10 absolute top-64 px-10">
-      <h5 className="text-[#473525] text-xl font-bold">
-        Blueberry
-      </h5>
-      <p className='text-[#555555] text-xs'>
-        Rich in antioxidants, this juice offers a
-        <br /> sweet and subtly tart flavor.
-      </p>
-      {/* Price Container */}
-      <div className="flex items-center gap-2 pt-1">
-        {/* Original Price */}
-        <span className='mt-1 text-[#FF4D00] text-sm font-semibold'>
-            $
-          </span>
-        <p className='ml-[-9px] text-[#555555] opacity-[65%] text-xl font-semibold' style={{ textDecoration: 'line-through', textDecorationColor: 'red' }}>
-         
-          10.00
-        </p>
-        {/* Sale Price */}
-        <p className='text-[#555555] text-xl font-semibold'>
-          <span className='text-[#FF4D00] text-sm font-semibold'>
-            $
-          </span>
-          8.00
-        </p>
-      </div>
-    </div>
-  </div>
-         </Link>
-
-
-          <Link href="/berryjuices/raspberry">
-            <div className="relative w-full h-[375px]">
-              {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
-              {/* Image */}
-              <div className="absolute inset-0 ml-7">
-                <div className='mt-[.7rem] flex items-center'>
-                  <Image
-                    src={raspBerryImg}
-                    alt="raspberry juice"
-                    height={190}
-                    width={190}
-                  />
-                  <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-                    <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
-                  </div>
+                <div className="flex items-center">
+                   {/* Displaying the original price with a red line for discounted items */}
+                   {item.hasDiscount && (
+                    <p className="text-md font-semibold line-through mr-2 text-[#555555] opacity-[75%] flex items-center">
+                      <span className='text-red-500'>$</span>{item.originalPrice.toFixed(2)}
+                    </p>
+                  )}
+                  <p className="text-[#555555] text-xl font-semibold flex items-center">
+                    <span className='text-[#FF4D00]'>$</span>{item.price.toFixed(2)}
+                  </p>
                 </div>
               </div>
-              {/* Text */}
-              <div className="z-10 absolute top-64 px-10">
-                <h5 className="text-[#473525] text-xl font-bold">
-                  Raspberry
-                </h5>
-                <p className='text-[#555555] text-xs'>
-                Tangy and refreshing, this juice is rich
-                <br /> in antioxidants and vibrant flavor.
-                </p>
-                <p className='pt-1 text-[#555555] text-xl font-semibold '>
-                  <span className='text-[#FF4D00] text-sm font-semibold'>
-                    $
-                  </span>
-                  11.00
-                </p>
-              </div>
-            </div>
-          </Link>
 
-          <Link href="/berryjuices/cranberry">
-            <div className="relative w-full h-[375px]">
-              {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
-              {/* Image */}
-              <div className="absolute inset-0 ml-7">
-                <div className='mt-[1rem] flex items-center'>
-                  <Image
-                    src={cranBerryJuiceImg}
-                    alt="cranberry juice"
-                    height={155}
-                    width={155}
-                  />
-                  <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-                    <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
-                  </div>
+              {/* Discount Icon for Discounted Items */}
+              {item.hasDiscount && (
+                <div className="absolute top-1 left-1">
+                  <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '65px'}}/>
                 </div>
-              </div>
-              {/* Text */}
-              <div className="z-10 absolute top-64 px-10">
-                <h5 className="text-[#473525] text-xl font-bold">
-                  Cranberry
-                </h5>
-                <p className='text-[#555555] text-xs'>
-                Tart and invigorating, known for its 
-                 <br /> beneficial effects on urinary tract
-                 <br /> health.
-                </p>
-                <p className='pt-1 text-[#555555] text-xl font-semibold '>
-                  <span className='text-[#FF4D00] text-sm font-semibold'>
-                    $
-                  </span>
-                  8.50
-                </p>
-              </div>
+              )}
             </div>
-          </Link>
-
-          <Link href="/berryjuices/blackberry">
-            <div className="relative w-full h-[375px]">
-              {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
-              {/* Image */}
-              <div className="absolute inset-0 ml-7">
-                <div className='mt-[2.1rem] flex items-center'>
-                  <Image
-                    src={blackBerryJuceImg}
-                    alt="blackberry juice"
-                    height={200}
-                    width={200}
-                  />
-                  <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
-                    <TbBasketPlus style={{color: '#fff', fontSize: '24px'}}/>
-                  </div>
-                </div>
-              </div>
-              {/* Text */}
-              <div className="z-10 absolute top-64 px-10">
-                <h5 className="text-[#473525] text-xl font-bold">
-                Blackberry
-                </h5>
-                <p className='pt-2 text-[#555555] text-xs'>
-                Deeply flavorful and rich in vitamins
-                <br /> and antioxidants.
-                </p>
-                <p className='pt-2 text-[#555555] text-xl font-semibold '>
-                  <span className='text-[#FF4D00] text-sm font-semibold'>
-                    $
-                  </span>
-                  7.50
-                </p>
-              </div>
-            </div>
-          </Link>
-
+          ))}
         </div>
-
 
         <Link href='/menucategories'>
-        <p className='my-6 underline font-medium text-[#53422B]'>
-          Back to menu categories
-        </p>
+          <p className='my-6 underline font-medium text-[#53422B]'>Back to menu categories</p>
         </Link>
-
 
       </div>
     </>

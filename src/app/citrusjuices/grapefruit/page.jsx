@@ -6,8 +6,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MdDeliveryDining } from "react-icons/md";
-import { grapeFruitJuiceImg, orangeJuiceImg } from '../../../../public/assets';
-import { TbBasketPlus } from "react-icons/tb";
+import { grapeFruitJuiceImg } from '../../../../public/assets';
 import { ImPhone } from "react-icons/im";
 import { TbBasketCheck } from "react-icons/tb";
 import { PiBasketFill } from 'react-icons/pi';
@@ -120,7 +119,7 @@ const GrapeFruit = () => {
                 <span className='text-[#FF4D00] text-sm font-semibold'>
                   $
                 </span>
-                7.00
+                8.00
               </p>
             </div>
 
