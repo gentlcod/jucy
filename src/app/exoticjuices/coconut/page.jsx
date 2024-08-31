@@ -85,8 +85,9 @@ const Coconut = () => {
         <div className='flex flex-col lg:flex-row items-center'>
           <Image
             src={coconutMainImg}
-            height={500}
-            width={500}
+            height={300}
+            width={300}
+            className='mr-[9rem]'
             alt='Coconut Juice'
           />
 

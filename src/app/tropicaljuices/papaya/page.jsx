@@ -85,8 +85,8 @@ const Papaya = () => {
         <div className='flex flex-col lg:flex-row items-center'>
           <Image
             src={papayaJuiceImg}
-            height={350}
-            width={350}
+            height={290}
+            width={290}
             alt='Papaya Juice'
             className='transfrom -scale-x-100'
           />

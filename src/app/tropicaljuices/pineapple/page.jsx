@@ -85,10 +85,10 @@ const Pineapple = () => {
         <div className='flex flex-col lg:flex-row items-center'>
           <Image
             src={pineappleJuiceImg}
-            height={523}
-            width={523}
+            height={300}
+            width={300}
             alt='Pineapple Juice'
-            className='lg:ml-[-5rem] transfrom -scale-x-100'
+            className='transfrom -scale-x-100'
           />
 
           {/* DESCRIPTION OF THE PRODUCT */}

@@ -83,10 +83,10 @@ const MenuCategories = () => {
               <div className="absolute inset-0 flex justify-center items-center">
                 <Image
                   src={citrusJuicesCategoryImg}
-                  className="blur-sm"
+                  className="blur-sm mt-8 mr-2 object-contain"
                   alt="citrus juices"
-                  height={230}
-                  width={230}
+                  height={175}
+                  width={175}
                 />
               </div>
               {/* Text */}
@@ -109,10 +109,10 @@ const MenuCategories = () => {
               <div className="absolute inset-0 flex justify-center items-center">
                 <Image
                   src={blackBerryJuceImg}
-                  className="blur-sm"
+                  className="blur-sm object-contain"
                   alt="berry juices"
-                  height={160}
-                  width={160}
+                  height={143}
+                  width={143}
                 />
               </div>
               {/* Text */}
@@ -135,10 +135,10 @@ const MenuCategories = () => {
               <div className="absolute inset-0 flex justify-center items-center">
                 <Image
                   src={tropicalJuicesCategoryImg}
-                  className="blur-sm"
+                  className="blur-sm object-contain mt-[-1.3rem]"
                   alt="tropical juices"
-                  height={500}
-                  width={500}
+                  height={550}
+                  width={550}
                 />
               </div>
               {/* Text */}
@@ -161,10 +161,10 @@ const MenuCategories = () => {
               <div className="absolute inset-9 mt-[-23px] flex justify-center items-center">
                 <Image
                   src={exoticJuicesCategoryImg}
-                  className="blur-sm"
+                  className="blur-sm object-contain mt-[-1rem]"
                   alt="exotic juices"
-                  height={180}
-                  width={180}
+                  height={177}
+                  width={177}
                 />
               </div>
               {/* Text */}
@@ -187,10 +187,10 @@ const MenuCategories = () => {
               <div className="absolute inset-0 flex justify-center items-center">
                 <Image
                   src={stoneFruitJuicesCategoryImg}
-                  className="blur-sm"
+                  className="blur-sm object-contain mt-6"
                   alt="stone fruit juices"
-                  height={160}
-                  width={160}
+                  height={180}
+                  width={180}
                 />
               </div>
               {/* Text */}
@@ -214,9 +214,9 @@ const MenuCategories = () => {
                 <Image
                   src={waterMelonJuiceImg}
                   alt="watermelon juices"
-                  className="blur-sm"
-                  height={500}
-                  width={500}
+                  className="blur-sm object-contain mt-[-2.7rem]"
+                  height={190}
+                  width={190}
                 />
               </div>
               {/* Text */}

@@ -86,8 +86,8 @@ const Lime = () => {
         <div className='flex items-center flex-col lg:flex-row'>
           <Image
             src={limeJuiceImg}
-            height={350}
-            width={350}
+            height={330}
+            width={330}
             alt='Lime Juice'
             className="lg:mr-9"
           />

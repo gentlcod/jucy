@@ -85,8 +85,8 @@ const Guava = () => {
         <div className='flex flex-col lg:flex-row items-center'>
           <Image
             src={guavaJuiceImg}
-            height={350}
-            width={350}
+            height={300}
+            width={300}
             alt='Guava Juice'
           />
 

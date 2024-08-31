@@ -19,6 +19,8 @@ const About = () => {
           <div className=' w-[150px] h-[200px] flex items-center justify-center rounded-xl bg-gradient-custom shadow-2xl'>
             <Image
               src={pineappleJuiceImg}
+              height={91}
+              width={91}
               alt='Pineapple juice'
               className='object-cover'
             />
@@ -27,6 +29,8 @@ const About = () => {
           <div className='w-[150px] lg:mt-[75px] lg:ml-0 md:ml-0 ml-[39px] h-[200px] flex items-center justify-center rounded-xl bg-gradient-custom shadow-2xl'>
             <Image
               src={waterMelonJuiceImg}
+              height={105}
+              width={105}
               alt='Watermelon juice'
               className='object-cover'
             />
@@ -35,6 +39,8 @@ const About = () => {
           <div className=' w-[150px] h-[200px] flex items-center justify-center rounded-xl bg-gradient-custom shadow-2xl'>
             <Image
               src={coconutMainImg}
+              height={107}
+              width={107}
               alt='Coconut water'
               className='object-cover'
             />

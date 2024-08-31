@@ -124,6 +124,7 @@ const melonJuices = () => {
                       height={165} 
                       width={165} 
                       className={item.name === 'Watermelon' || item.name === 'Honey Dew' ? 'flip-image' : ''}
+                      style={{marginTop: '-1rem'}}
                     />
                     <div className="absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3">
                       {addedItems.includes(item.name) ? (

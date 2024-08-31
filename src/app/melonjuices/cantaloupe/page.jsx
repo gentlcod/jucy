@@ -85,8 +85,8 @@ const Cantalope = () => {
         <div className='flex flex-col lg:flex-row items-center'>
           <Image
             src={cantalopeJuiceImg}
-            height={390}
-            width={390}
+            height={290}
+            width={290}
             alt='Cantalope Juice'
           />
 

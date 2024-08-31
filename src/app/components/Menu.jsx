@@ -27,14 +27,15 @@ const Menu = () => {
       <div className='absolute inset-0 bg-gradient-custom border border-[1.5px] border-white rounded-3xl blur-sm'></div>
       <div className='relative p-[10px] z-10 flex flex-col'>
 
-            <div  className='relative ml-4'>
+            <div  className='relative ml-4 mt-[-.5rem]'>
             <Image
             src={blueBerryJuiceImg}
             alt='berry juice'
-            height={120}
-            width={120}
+            height={117}
+            width={117}
+            className='transform -scale-x-100'
             />
-            <h5 className='mt-2 text-[#53422B] font-semibold'>
+            <h5 className='mt-1 text-[#53422B] font-semibold'>
             Berry Burst Bliss
             </h5>
             <p className='mt-2 text-xs font-thin text-[#555555]'>
@@ -53,14 +54,14 @@ const Menu = () => {
 
       <div className='relative w-[250px] h-[270px] xl:m-0 m-5'>
       <div className='absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm'></div>
-            <div  className='relative ml-4 mt-[-19px]'>
+            <div  className='relative ml-4'>
             <Image
             src={mangoJuiceImg}
             alt='mango juice'
-            height={150}
-            width={150}
+            height={120}
+            width={120}
             />
-            <h5 className='mt-[-9px] text-[#53422B] font-semibold'>
+            <h5 className='mt-2 text-[#53422B] font-semibold'>
             Mango Bliss Burst
             </h5>
 
@@ -81,8 +82,8 @@ const Menu = () => {
             <Image
             src={kiwiJuiceImg}
             alt='kiwi juice'
-            height={400}
-            width={400}
+            height={133}
+            width={133}
             />
 
             <h5 className='text-[#53422B] font-semibold'>

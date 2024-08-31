@@ -80,7 +80,7 @@ const tropicalJuices = () => {
     {
       name: 'Guava',
       price: 9.00,
-      imgUrl: guavaJuiceImg,
+      imageUrl: guavaJuiceImg,
       description: 'Tropical and rich in nutrients, with a unique flavor that’s a mix of pear and strawberry.'
     },
     {
@@ -137,6 +137,7 @@ const tropicalJuices = () => {
                       height={165} 
                       width={165} 
                       className={item.name === 'Papaya' || item.name === 'Passion Fruit' || item.name === 'Pineapple' ? 'flip-image' : ''}
+                      style={{marginTop: '-1.55rem'}}
                     />
                     <div className="absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3">
                       {addedItems.includes(item.name) ? (

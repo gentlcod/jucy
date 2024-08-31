@@ -86,8 +86,8 @@ const PassionFruit = () => {
         <div className='flex flex-col lg:flex-row items-center'>
           <Image
             src={passionFruitJuiceImg}
-            height={350}
-            width={350}
+            height={290}
+            width={290}
             alt='Passion Fruit Juice'
             className='transform -scale-x-100'
           />
