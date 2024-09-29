@@ -57,7 +57,7 @@ const SignUp = () => {
     <div data-aos='fade-up'>
       <div className='mt-12'>
         <Link href="/">
-          <p className='lg:hidden max-sm:mt-[-1.7rem] max-sm:ml-[1.5rem] md:pl-[7.7rem]'><FaArrowLeft />Back</p>
+          <p className='max-sm:mt-[-1.7rem] max-sm:ml-[1.5rem] md:pl-[7.7rem]'><FaArrowLeft />Back</p>
         </Link>
       </div>
       <div className='max-w-[400px] mx-auto min-h-[600px] mt-4 px-4'>
@@ -149,6 +149,7 @@ const SignUp = () => {
           </button>
         </form>
       </div>
+
     </div>
   );
 };

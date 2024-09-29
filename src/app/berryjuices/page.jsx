@@ -146,7 +146,7 @@ const berryJuices = () => {
             <div key={index} className="relative w-full h-[375px]">
               <Link href={`/berryjuices/${item.name.toLowerCase().replace(' ', '')}`}>
               {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
+              <div className="absolute inset-0 bg-gradient-custom border-white border-[1.5px] rounded-3xl blur-sm"></div>
               {/* Image */}
               <div className="absolute inset-0 ml-7">
                 <div className='flex items-center'>

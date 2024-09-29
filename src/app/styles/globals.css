@@ -4,7 +4,7 @@
 
 
 #preloader{
-  background: transparent url(../../../public/assets/preloader.gif) no-repeat center center fixed;
+  background: #F2DAAB url(../../../public/assets/preloader.gif) no-repeat center center fixed;
   height: 100vh;
   width: 100%;
   position: fixed;

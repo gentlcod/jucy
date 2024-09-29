@@ -79,7 +79,7 @@ const Navbar = () => {
           </button>
         </div>
         <div className='font-md text-primary'>
-          <ul className='hidden md:flex flex items-center text-[#53422B]'>
+          <ul className='hidden xl:flex items-center text-[#53422B]'>
             <li className={`cursor-pointer xl:ml-12 lg:ml-8 md:ml-7 text-sm uppercase duration-500 ${activeNavLink === 'home' ? 'font-bold' : ''}`} onClick={() => handleNavClick('home')}>
               Home
             </li>
@@ -93,9 +93,9 @@ const Navbar = () => {
               Contact
             </li>
             {user ? (
-              <div className='ml-[19rem] flex items-center'>
+              <div className='ml-[19rem] mt-2 flex flex-col gap-1 items-center'>
                 <span className='text-[#53422B] mr-4'>{user.email}</span>
-                <button onClick={logout} className='bg-red-500 text-white px-4 py-2 rounded-md'>
+                <button onClick={logout} className='bg-red-500 text-white px-3 py-1 rounded-md'>
                   Sign Out
                 </button>
               </div>
@@ -111,20 +111,20 @@ const Navbar = () => {
             )}
           </ul>
 
-          <div onClick={handleNav} className='md:hidden cursor-pointer' data-aos="fade-up" data-aos-duration="1500">
-            {nav ? '' : <AiOutlineMenu style={{color: '#53422B', fontSize: '24px'}} />}
+          <div onClick={handleNav} className='flex xl:hidden lg:mr-24 md:mr-4 sm:mr-3 mr-2 cursor-pointer' data-aos="fade-up" data-aos-duration="1500">
+            {nav ? '' : <AiOutlineMenu style={{color: '#53422B'}} className='lg:text-[45px] md:text-[39px] sm:text-[37px] text-[35px]' />}
           </div>
         </div>
       </div>
-      <div className={nav ? "md:hidden fixed right-0 top-0 w-full h-screen" : ""}>
+      <div className={nav ? "flex xl:hidden fixed right-0 top-0 w-full h-screen" : ""}>
         <div className={nav ? "fixed right-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen p-10 ease-in duration-500" : "fixed right-[-150%] top-0 p-10 ease-in duration-500"}>
           <div className='flex w-full items-center justify-between cursor-pointer'>
             <div className='my-2' />
-            <div onClick={handleNav} className='mr-[-27px] mt-[-17px]'>
-              <AiOutlineClose style={{color: '#53422B', fontSize: '24px'}} />
+            <div onClick={handleNav} className='mr-[-27px] mt-[-17px] lg:mr-16 md:mr-[.1rem] sm:mr-[.1rem]'>
+              <AiOutlineClose style={{color: '#53422B'}} className='lg:text-[45px] md:text-[39px] sm:text-[37px] text-[35px]' />
             </div>
           </div>
-          <div className='py-4 flex bg-[#FFEDB7] shadow-lg p-7 rounded-xl flex-col'>
+          <div className='py-4 flex bg-[#FFEDB7] w-full shadow-lg rounded-xl flex-col'>
             <ul className='uppercase'>
               <li onClick={() => handleNavClick('home')} className={`text-center text-[#53422B] cursor-pointer text-sm uppercase pt-3 ${activeNavLink === 'home' ? 'font-bold' : ''}`}>
                 Home
@@ -139,9 +139,9 @@ const Navbar = () => {
                 Contact
               </li>
               {user ? (
-                <div className='flex flex-col items-start pt-7'>
-                  <span className='text-[#53422B] mb-4' style={{textTransform: 'none'}}>{user.email}</span>
-                  <button onClick={logout} className='bg-red-500 text-white px-4 py-2 rounded-md'>
+                <div className='flex flex-col items-center text-center pt-7'>
+                  <span className='text-[#53422B] mb-4 lg:text-lg sm:text-sm text-xs' style={{textTransform: 'none'}}>{user.email}</span>
+                  <button onClick={logout} className='mb-9 bg-red-500 text-white px-3 py-1 rounded-md'>
                     Sign Out
                   </button>
                 </div>
@@ -156,7 +156,7 @@ const Navbar = () => {
                 </>
               )}
             </ul>
-            <div className='flex justify-around py-2 text-[#53422B]'>
+            <div className='flex justify-around py-2 text-[#53422B] text-xl'>
               <FaFacebook />
               <FaTwitter />
               <FaInstagram />

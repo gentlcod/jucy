@@ -78,7 +78,7 @@ const MenuCategories = () => {
           <Link href="/citrusjuices">
             <div className="relative w-[280px] h-[300px]">
               {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
+              <div className="absolute inset-0 bg-gradient-custom border-white border-[1.5px] rounded-3xl blur-sm"></div>
               {/* Image */}
               <div className="absolute inset-0 flex justify-center items-center">
                 <Image
@@ -104,7 +104,7 @@ const MenuCategories = () => {
           <Link href="/berryjuices">
             <div className="relative w-[280px] h-[300px]">
               {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
+              <div className="absolute inset-0 bg-gradient-custom border-white border-[1.5px] rounded-3xl blur-sm"></div>
               {/* Image */}
               <div className="absolute inset-0 flex justify-center items-center">
                 <Image
@@ -130,7 +130,7 @@ const MenuCategories = () => {
           <Link href="/tropicaljuices">
             <div className="relative w-[280px] h-[300px]">
               {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
+              <div className="absolute inset-0 bg-gradient-custom border-white border-[1.5px] rounded-3xl blur-sm"></div>
               {/* Image */}
               <div className="absolute inset-0 flex justify-center items-center">
                 <Image
@@ -156,7 +156,7 @@ const MenuCategories = () => {
           <Link href="/exoticjuices">
             <div className="relative w-[280px] h-[300px]">
               {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
+              <div className="absolute inset-0 bg-gradient-custom border-white border-[1.5px] rounded-3xl blur-sm"></div>
               {/* Image */}
               <div className="absolute inset-9 mt-[-23px] flex justify-center items-center">
                 <Image
@@ -182,7 +182,7 @@ const MenuCategories = () => {
           <Link href="/stonefruitjuices">
             <div className="relative w-[280px] h-[300px]">
               {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
+              <div className="absolute inset-0 bg-gradient-custom border-white border-[1.5px] rounded-3xl blur-sm"></div>
               {/* Image */}
               <div className="absolute inset-0 flex justify-center items-center">
                 <Image
@@ -208,7 +208,7 @@ const MenuCategories = () => {
           <Link href="/melonjuices">
             <div className="relative w-[280px] h-[300px]">
               {/* Blurred Background */}
-              <div className="absolute inset-0 bg-gradient-custom border border-white border-[1.5px] rounded-3xl blur-sm"></div>
+              <div className="absolute inset-0 bg-gradient-custom border-white border-[1.5px] rounded-3xl blur-sm"></div>
               {/* Image */}
               <div className="absolute inset-0 flex justify-center items-center">
                 <Image

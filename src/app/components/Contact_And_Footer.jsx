@@ -154,7 +154,7 @@ const Contact_And_Footer = () => {
       {/* footer  */}
 
       <footer >
-        <div className='border border-[0.1px] border-[#53422B] w-full' style={{color: '#53422B'}}/>
+        <div className='border-[0.1px] border-[#53422B] w-full' style={{color: '#53422B'}}/>
         <p className='text-[#53422B] text-md py-4 text-center'>
           &copy; 2024 All Rights Reserved By Jucy 
         </p>

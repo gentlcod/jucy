@@ -14,6 +14,7 @@ import { logoImg } from '../../../public/assets';
 import Image from 'next/image';
 import styles from '../signup/module.css'
 import { useAuth } from '../contexts/authContext';
+import Navbar from '../components/Navbar';
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
@@ -49,12 +50,17 @@ const LogIn = () => {
   }, []);
 
   return (
+    
     <div data-aos='fade-up'>
       <div className='mt-12'>
         <Link href="/">
-          <p className='lg:hidden max-sm:mt-[-1.7rem] max-sm:ml-[1.5rem] md:pl-[7.7rem]'><FaArrowLeft />Back</p>
+          <p className='max-sm:mt-[-1.7rem] max-sm:ml-[1.5rem] md:pl-[7.7rem]'><FaArrowLeft />Back</p>
         </Link>
       </div>
+
+      <br />
+      <br />
+      <br />
       <div className='max-w-[400px] mx-auto min-h-[600px] mt-4 px-4'>
         <Link href='/'>
           <Image 
@@ -116,6 +122,8 @@ const LogIn = () => {
           </button>
         </form>
       </div>
+
+
     </div>
   );
 };
