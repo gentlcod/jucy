@@ -89,7 +89,7 @@ const Basket = () => {
               <Image src={logoImg} alt='logo' height={85} width={85} data-aos="fade-right" data-aos-duration="1500"/>
             </Link>
           </div>
-          <h5 className="xl:ml-80 lg:ml-0  text-[#53422B] font-bold" data-aos="fade-down">
+          <h5 className="xl:ml-[22rem] xl:flex hidden  text-[#53422B] font-bold" data-aos="fade-down">
             Basket
           </h5>
           <div className='font-md text-primary'>
@@ -159,6 +159,7 @@ const Basket = () => {
 
       {/* Basket Content */}
       <div className='lg:px-[120px] px-5 lg:mt-0 mt-[3.5rem] pt-36 mb-2 flex items-center text-center justify-center'>
+        <h5 className='flex xl:hidden absolute top-24 text-center text-[#53422B] font-extrabold'>Basket</h5>
         {basketItems.length === 0 ? (
           <p className='text-[#53422B]'>
             Your basket is empty, please check the menu and add a juice to the basket.
@@ -170,7 +171,7 @@ const Basket = () => {
             {basketItems.map((item) => (
               <div key={item.id} className="relative"> 
                 {/* Blur Background */}
-                <div className="absolute inset-0 bg-gradient-custom w-[370px] h-[400px] border-white border-[1.5px] rounded-3xl blur-sm z-0"></div>
+                <div className="absolute inset-0 bg-gradient-custom md:w-[370px] sm:w-[317px] sm:h-[400px] h-[387px] border-white border-[1.5px] rounded-3xl blur-sm z-0"></div>
                 
                 {/* Image and Item Info */}
                 <div className="relative z-10">
