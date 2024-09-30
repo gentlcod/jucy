@@ -5,8 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
-import { RiDiscountPercentFill } from "react-icons/ri";
 import { FaMinus } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
+import { RiDiscountPercentFill } from "react-icons/ri";
 import { useAuth } from '../contexts/authContext';
 import { db } from '../firebase';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'; 
@@ -16,7 +17,22 @@ const Basket = () => {
   const [nav, setNav] = useState(false);
   const [shadow, setShadow] = useState(false);
   const [basketItems, setBasketItems] = useState([]);
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [itemToRemove, setItemToRemove] = useState(null)
   const { user, logout } = useAuth() || {};
+
+
+  const handleConfirmRemove = function(itemId) {
+    setItemToRemove(itemId) // Set the ID of the item to be removed
+    setShowConfirm(true) // Show the confirmation dialog
+  }
+
+  const handleCancel = () => {
+    setShowConfirm(false); // Hide the confirmation dialog
+    setItemToRemove(null); // Reset the item to remove
+  };
+
+
 
   useEffect(() => {
     const handleShadow = () => {
@@ -54,29 +70,36 @@ const Basket = () => {
     } else {
       localStorage.setItem('basket', JSON.stringify(updatedBasket));
     }
-  };
+
+    // Reset the confirmation dialog state
+    setShowConfirm(false);
+    setItemToRemove(null);
+};
+
 
   const handleNav = () => setNav(!nav);
 
   return (
     <div className='overflow-hidden'>
        {/* Navbar */}
-       <div className={`fixed w-full h-20 z-[100] navbar ${shadow ? 'navbar-shadow' : ''}`}>
+       <div className={`fixed w-full h-20 z-[50] navbar ${shadow ? 'navbar-shadow' : ''}`}>
         <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16">
           <div className='lg:ml-[70px] cursor-pointer'>
             <Link href='/'>
               <Image src={logoImg} alt='logo' height={85} width={85} data-aos="fade-right" data-aos-duration="1500"/>
             </Link>
           </div>
-          <h5 className="xl:ml-80 lg:ml-0 ml-[-1.75rem]  text-[#53422B] font-bold" data-aos="fade-down">
+          <h5 className="xl:ml-80 lg:ml-0  text-[#53422B] font-bold" data-aos="fade-down">
             Basket
           </h5>
           <div className='font-md text-primary'>
             <ul className='hidden xl:flex items-center text-[#53422B]'>
               {user ? (
-                <div className='xl:ml-[19rem] mt-2 flex flex-col gap-1 items-center'>
-                  <span className='text-[#53422B]'>{user.email}</span>
-                  <button onClick={logout} className='bg-red-500 text-white px-3 py-1 rounded-md'>
+                <div className='xl:ml-[15rem] mt-2 flex flex-col gap-1 items-center'
+                data-aos='fade-left'
+                >
+                  <span className='text-[#53422B] mr-11'>{user.email}</span>
+                  <button onClick={logout} className='mr-11 bg-red-500 text-white px-3 py-1 rounded-md z-[-1]'>
                     Sign Out
                   </button>
                 </div>
@@ -135,57 +158,69 @@ const Basket = () => {
       </div>
 
       {/* Basket Content */}
-      <div className='lg:mt-0 mt-[3.5rem] pt-48 lg:px-0 px-[3rem] mb-2 flex items-center text-center justify-center'>
+      <div className='lg:px-[120px] px-5 lg:mt-0 mt-[3.5rem] pt-36 mb-2 flex items-center text-center justify-center'>
         {basketItems.length === 0 ? (
           <p className='text-[#53422B]'>
             Your basket is empty, please check the menu and add a juice to the basket.
           </p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-4">
-            {basketItems.map((item, index) => (
-              <div key={index} className="relative bg-white rounded-lg shadow-lg p-4 h-auto">
-                {/* Image */}
-                <div className='flex justify-center items-center'>
-                  <Image
-                    src={item.imageUrl}
-                    alt={`${item.name} juice`}
-                    height={165}
-                    width={165}
-                    className={item.name === 'Blueberry' ? 'flip-image' : ''}
-                  />
+          <div className="grid grid-cols-1  sm:grid-cols-2 xl:grid-cols-3 gap-12 mt-4"
+          data-aos='fade-down'
+          >
+            {basketItems.map((item) => (
+              <div key={item.id} className="relative"> 
+                {/* Blur Background */}
+                <div className="absolute inset-0 bg-gradient-custom w-[370px] h-[400px] border-white border-[1.5px] rounded-3xl blur-sm z-0"></div>
+                
+                {/* Image and Item Info */}
+                <div className="relative z-10">
+                  <div className='flex justify-start ml-6'>
+                    <Image
+                      src={item.imageUrl}
+                      alt={`${item.name} juice`}
+                      height={165}
+                      width={165}
+                      className={item.name === 'Blueberry' ? 'flip-image' : ''}
+                    />
+                    <button className="absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3"
+                     onClick={() => handleConfirmRemove(item.id)}
+                    >
+                      <FaMinus className='text-white text-[24px]'/>
+                    </button>
+                  </div>
+
+                  {/* Discount Icon */}
+                  {item.hasDiscount && (
+                    <div className="absolute top-2 left-2 z-10">
+                      <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '50px'}}/>
+                    </div>
+                  )}
+
+                  {/* Item Info */}
+                  <div className="text-left ml-6 mt-4">
+                    <h5 className="text-[#473525] text-xl font-bold">{item.name}</h5>
+                    <p className='text-[#555555] text-sm'>{item.description}</p>
+
+                    <div className="flex items-center">
+                  {/* Displaying the original price with a red line for discounted items */}
+                  {item.hasDiscount && (
+                    <p className="text-md font-semibold line-through mr-2 text-[#555555] opacity-[75%] flex items-center">
+                      <span className='text-red-500'>$</span>{item.originalPrice.toFixed(2)}
+                    </p>
+                  )}
+                  <p className="text-[#555555] text-xl font-semibold flex items-center">
+                    <span className='text-[#FF4D00]'>$</span>{item.price.toFixed(2)}
+                  </p>
                 </div>
 
-                {/* Discount Icon */}
-                {item.hasDiscount && (
-                  <div className="absolute top-2 left-2">
-                    <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '50px'}}/>
-                  </div>
-                )}
+                {/* Discount Icon for Discounted Items */}
+              {item.hasDiscount && (
+                <div className="absolute top-1 left-1">
+                  <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '65px'}}/>
+                </div>
+              )}
 
-                {/* Item Info */}
-                <div className="text-center mt-4">
-                  <h5 className="text-[#473525] text-xl font-bold">{item.name}</h5>
-                  <p className='text-[#555555] text-sm'>{item.description}</p>
-
-                  <div className="flex justify-center items-center mt-2">
-                    {item.hasDiscount && (
-                      <p className="text-md font-semibold line-through mr-2 text-[#555555]">
-                        ${item.originalPrice.toFixed(2)}
-                      </p>
-                    )}
-                    <p className="text-[#FF4D00] text-xl font-semibold">
-                      ${item.price.toFixed(2)}
-                    </p>
-                  </div>
-
-                  {/* Remove button */}
-                  <div className="mt-4">
-                    <button 
-                      className="bg-red-500 text-white px-3 py-1 rounded-md"
-                      onClick={() => handleRemoveFromBasket(item.id)}
-                    >
-                      <FaMinus />
-                    </button>
+                  
                   </div>
                 </div>
               </div>
@@ -193,9 +228,28 @@ const Basket = () => {
           </div>
         )}
       </div>
-
-      {/* Continue Shopping Button */}
-      <div className='mt-5 flex justify-center'>
+      {/* Confirmation Dialog */}
+      {showConfirm && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-gradient-custom border border-[#555555] sm:px-20 sm:py-14 px-9 py-7 rounded-3xl shadow-lg"
+          data-aos='zoom-in'
+          >
+            <button className="absolute top-0 right-0 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-3xl rounded-bl-2xl py-2 px-3"
+                     onClick={handleCancel}
+                    >
+                      <IoClose className='text-[#53422B] text-[29px] font-extrabold'/>
+                    </button>
+            <p className='text-center text-[#53422B] text-md mb-7'>Are you sure you want to
+              <br />  remove this item from the basket?</p>
+            <div className="flex justify-center gap-9 mt-4">
+              <button onClick={handleCancel} className="mr-2 bg-transparent text-[#53422B] border border-[#53422B] px-3 py-1 rounded-md">Cancel</button>
+              <button onClick={() => handleRemoveFromBasket(itemToRemove)} className="bg-[#53422B] text-white px-3 py-1 rounded-md">Remove</button>
+            </div>
+          </div>
+        </div>
+      )}
+       {/* Continue Shopping Button */}
+       <div className='my-16 flex justify-center'>
         <Link href="/menucategories">
           <button className="bg-[#53422B] text-white p-3 rounded-md">Continue Shopping</button>
         </Link>

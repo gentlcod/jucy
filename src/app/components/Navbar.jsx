@@ -79,7 +79,9 @@ const Navbar = () => {
           </button>
         </div>
         <div className='font-md text-primary'>
-          <ul className='hidden xl:flex items-center text-[#53422B]'>
+          <ul className='hidden xl:flex items-center text-[#53422B]'
+          data-aos='fade-down'
+          >
             <li className={`cursor-pointer xl:ml-12 lg:ml-8 md:ml-7 text-sm uppercase duration-500 ${activeNavLink === 'home' ? 'font-bold' : ''}`} onClick={() => handleNavClick('home')}>
               Home
             </li>
@@ -93,9 +95,11 @@ const Navbar = () => {
               Contact
             </li>
             {user ? (
-              <div className='ml-[19rem] mt-2 flex flex-col gap-1 items-center'>
-                <span className='text-[#53422B] mr-4'>{user.email}</span>
-                <button onClick={logout} className='bg-red-500 text-white px-3 py-1 rounded-md'>
+              <div className='ml-[19rem] mt-2 flex flex-col gap-1 items-center'
+              data-aos='fade-left'
+              >
+                <span className='text-[#53422B] mr-11'>{user.email}</span>
+                <button onClick={logout} className='mr-11 bg-red-500 text-white px-3 py-1 rounded-md'>
                   Sign Out
                 </button>
               </div>
