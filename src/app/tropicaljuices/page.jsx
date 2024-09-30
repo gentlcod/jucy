@@ -9,7 +9,7 @@ import { RiDiscountPercentFill } from "react-icons/ri";
 import { TbBasketPlus } from "react-icons/tb";
 import { IoCheckbox } from "react-icons/io5"; // Checkbox icon
 import { guavaJuiceImg, mangoJuiceImg, papayaJuiceImg, passionFruitJuiceImg, pineappleJuiceImg } from '../../../public/assets';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { PiBasketFill } from 'react-icons/pi';
@@ -31,36 +31,66 @@ const tropicalJuices = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser); // Set the user state when authenticated
-    });
-  }, []);
-
-  const addToBasket = async (item) => {
-    if (!user) {
-      alert("Please sign in to add items to the basket.");
-      return;
-    }
-
-    try {
-      await addDoc(collection(db, 'basket'), {
-        uid: user.uid, // Store the user's unique ID with the basket item
-        name: item.name,
-        price: item.price,
-        imageUrl: item.imageUrl,
-        description: item.description,
-        quantity: 1, // default quantity
-        timestamp: new Date(),
+     // Listen for user authentication changes
+     useEffect(() => {
+      const auth = getAuth();
+      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser); // Set the user state when authenticated
+        if (currentUser) {
+          fetchBasketItems(currentUser.uid); // Fetch items on user authentication
+        }
       });
-
-      setAddedItems([...addedItems, item.name]); // Add the item name to the addedItems state
-      alert(`${item.name} added to basket!`);
-    } catch (error) {
-      console.error("Error adding item to basket: ", error);
-    }
-  };
+      return () => unsubscribe(); // Cleanup subscription
+    }, []);
+  
+    // Fetch items from Firestore
+    const fetchBasketItems = async (uid) => {
+      const basketRef = collection(db, `users/${uid}/basket`);
+      const snapshot = await getDocs(basketRef);
+      const items = snapshot.docs.map(doc => doc.data().name); // Get item names
+      setAddedItems(items); // Set added items
+    };
+  
+    // Add to basket function
+    const addToBasket = async (item) => {
+      if (!user) {
+        alert("Please sign in to add items to the basket.");
+        return;
+      }
+  
+      try {
+        await addDoc(collection(db, `users/${user.uid}/basket`), {
+          name: item.name,
+          price: item.price,
+          imageUrl: item.imageUrl,
+          description: item.description,
+          quantity: 1,
+          timestamp: new Date(),
+        });
+  
+        setAddedItems([...addedItems, item.name]);
+      } catch (error) {
+        console.error("Error adding item to basket: ", error);
+      }
+    };
+  
+    // Remove from basket function
+    const removeFromBasket = async (item) => {
+      if (!user) return;
+  
+      try {
+        const basketRef = collection(db, `users/${user.uid}/basket`);
+        const querySnapshot = await getDocs(basketRef);
+        const itemToDelete = querySnapshot.docs.find(doc => doc.data().name === item.name);
+  
+        if (itemToDelete) {
+          await deleteDoc(doc(basketRef, itemToDelete.id));
+          setAddedItems((prev) => prev.filter(name => name !== item.name)); // Update local state
+        }
+      } catch (error) {
+        console.error("Error removing item from basket: ", error);
+      }
+    };
 
   const items = [
     {
@@ -139,16 +169,22 @@ const tropicalJuices = () => {
                       className={item.name === 'Papaya' || item.name === 'Passion Fruit' || item.name === 'Pineapple' ? 'flip-image' : ''}
                       style={{marginTop: '-1.55rem'}}
                     />
-                    <div className="absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3">
+                    <div className="absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3"
+                     onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation(); // Prevents the parent Link from triggering
+                      if(addedItems.includes(item.name)) {
+                        removeFromBasket(item) // Remove item if already added
+                      } else {
+                      addToBasket(item); // Pass the juice item to addToBasket
+                      }
+                    }}
+                    >
                       {addedItems.includes(item.name) ? (
                         <IoCheckbox style={{ color: '#fff', fontSize: '24px' }} /> // Display IoCheckbox if the item is added
                       ) : (
                         <TbBasketPlus
                           style={{ color: '#fff', fontSize: '24px' }}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            addToBasket(item);
-                          }}
                         />
                       )}
                     </div>

@@ -3,82 +3,79 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { logoImg } from '../../../public/assets';
 import { FaTwitter, FaInstagram, FaFacebook } from 'react-icons/fa';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { RiDiscountPercentFill } from "react-icons/ri";
+import { FaMinus } from "react-icons/fa";
 import { useAuth } from '../contexts/authContext';
-import { db } from '../firebase'; // Import your Firestore configuration
-import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'; // Firestore functions
+import { db } from '../firebase';
+import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'; 
+import { logoImg } from '../../../public/assets';
 
 const Basket = () => {
-  const [nav, setNav] = useState(false); // State for mobile navigation
-  const [shadow, setShadow] = useState(false); // State for navbar shadow
-  const [basketItems, setBasketItems] = useState([]); // State for basket items
-  const { user = null, logout = () => window.location.href = '/' } = useAuth() || {}; // User context
+  const [nav, setNav] = useState(false);
+  const [shadow, setShadow] = useState(false);
+  const [basketItems, setBasketItems] = useState([]);
+  const { user, logout } = useAuth() || {};
 
-  // Handle navbar shadow on scroll
   useEffect(() => {
     const handleShadow = () => {
       setShadow(window.scrollY >= 5);
     };
-
     window.addEventListener('scroll', handleShadow);
     return () => {
       window.removeEventListener('scroll', handleShadow);
     };
   }, []);
 
-  // Fetch basket items when the component mounts or user changes
   useEffect(() => {
     if (user) {
-      fetchBasketItemsForUser(user.uid); // Fetch from Firestore if user is authenticated
+      fetchBasketItemsForUser(user.uid);
     } else {
-      const storedBasket = JSON.parse(localStorage.getItem('basket')) || []; // Get from local storage if not authenticated
+      const storedBasket = JSON.parse(localStorage.getItem('basket')) || [];
       setBasketItems(storedBasket);
     }
   }, [user]);
 
-  // Function to fetch basket items for the authenticated user
   const fetchBasketItemsForUser = async (userId) => {
-    if (!userId) return; // Return if no userId
-    const basketRef = collection(db, `users/${userId}/basket`); // Reference to the user's basket in Firestore
-    const basketSnapshot = await getDocs(basketRef); // Get documents from Firestore
-    const items = basketSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })); // Map to item objects
-    setBasketItems(items); // Set basket items state
+    if (!userId) return;
+    const basketRef = collection(db, `users/${userId}/basket`);
+    const basketSnapshot = await getDocs(basketRef);
+    const items = basketSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setBasketItems(items);
   };
 
-  // Function to remove an item from the basket
   const handleRemoveFromBasket = async (itemId) => {
-    const updatedBasket = basketItems.filter(item => item.id !== itemId); // Filter out the removed item
-    setBasketItems(updatedBasket); // Update state
+    const updatedBasket = basketItems.filter(item => item.id !== itemId);
+    setBasketItems(updatedBasket);
 
     if (user) {
-      // If authenticated, remove from Firestore
       await deleteDoc(doc(db, `users/${user.uid}/basket`, itemId));
     } else {
-      // If not authenticated, update local storage
       localStorage.setItem('basket', JSON.stringify(updatedBasket));
     }
   };
 
-  // Function to handle mobile navigation toggle
-  const handleNav = () => setNav(prev => !prev);
+  const handleNav = () => setNav(!nav);
 
   return (
     <div className='overflow-hidden'>
-      {/* Navbar */}
-      <div className={`fixed w-full h-20 z-[100] navbar ${shadow ? 'navbar-shadow' : ''}`}>
+       {/* Navbar */}
+       <div className={`fixed w-full h-20 z-[100] navbar ${shadow ? 'navbar-shadow' : ''}`}>
         <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16">
           <div className='lg:ml-[70px] cursor-pointer'>
             <Link href='/'>
               <Image src={logoImg} alt='logo' height={85} width={85} data-aos="fade-right" data-aos-duration="1500"/>
             </Link>
           </div>
+          <h5 className="xl:ml-80 lg:ml-0 ml-[-1.75rem]  text-[#53422B] font-bold" data-aos="fade-down">
+            Basket
+          </h5>
           <div className='font-md text-primary'>
             <ul className='hidden xl:flex items-center text-[#53422B]'>
               {user ? (
                 <div className='xl:ml-[19rem] mt-2 flex flex-col gap-1 items-center'>
-                  <span className='text-[#53422B] mr-4'>{user.email}</span>
+                  <span className='text-[#53422B]'>{user.email}</span>
                   <button onClick={logout} className='bg-red-500 text-white px-3 py-1 rounded-md'>
                     Sign Out
                   </button>
@@ -138,29 +135,67 @@ const Basket = () => {
       </div>
 
       {/* Basket Content */}
-      <div className='lg:mt-0 mt-[3.5rem] pt-48 lg:px-0 px-[3rem] mb-2 flex items-center text-center justify-center' data-aos='fade-up'>
+      <div className='lg:mt-0 mt-[3.5rem] pt-48 lg:px-0 px-[3rem] mb-2 flex items-center text-center justify-center'>
         {basketItems.length === 0 ? (
           <p className='text-[#53422B]'>
-            Your basket is empty, please check the menu
-            <br /> and add a juice to the basket.
+            Your basket is empty, please check the menu and add a juice to the basket.
           </p>
         ) : (
-          <div className='text-left'>
-            <h3 className='text-[#53422B] font-bold mb-4'>Your Basket:</h3>
-            <ul>
-              {basketItems.map((item) => (
-                <li key={item.id} className='text-[#53422B] mb-2 flex justify-between'>
-                  {item.name} - ${item.price}
-                  <button onClick={() => handleRemoveFromBasket(item.id)} className='text-red-500'>Remove</button>
-                </li>
-              ))}
-            </ul>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-4">
+            {basketItems.map((item, index) => (
+              <div key={index} className="relative bg-white rounded-lg shadow-lg p-4 h-auto">
+                {/* Image */}
+                <div className='flex justify-center items-center'>
+                  <Image
+                    src={item.imageUrl}
+                    alt={`${item.name} juice`}
+                    height={165}
+                    width={165}
+                    className={item.name === 'Blueberry' ? 'flip-image' : ''}
+                  />
+                </div>
+
+                {/* Discount Icon */}
+                {item.hasDiscount && (
+                  <div className="absolute top-2 left-2">
+                    <RiDiscountPercentFill style={{color: '#FF4D00', fontSize: '50px'}}/>
+                  </div>
+                )}
+
+                {/* Item Info */}
+                <div className="text-center mt-4">
+                  <h5 className="text-[#473525] text-xl font-bold">{item.name}</h5>
+                  <p className='text-[#555555] text-sm'>{item.description}</p>
+
+                  <div className="flex justify-center items-center mt-2">
+                    {item.hasDiscount && (
+                      <p className="text-md font-semibold line-through mr-2 text-[#555555]">
+                        ${item.originalPrice.toFixed(2)}
+                      </p>
+                    )}
+                    <p className="text-[#FF4D00] text-xl font-semibold">
+                      ${item.price.toFixed(2)}
+                    </p>
+                  </div>
+
+                  {/* Remove button */}
+                  <div className="mt-4">
+                    <button 
+                      className="bg-red-500 text-white px-3 py-1 rounded-md"
+                      onClick={() => handleRemoveFromBasket(item.id)}
+                    >
+                      <FaMinus />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </div>
 
       {/* Continue Shopping Button */}
-      <div className='flex justify-center lg:px-0 px-[3rem]' data-aos='fade-up'>
+      <div className='mt-5 flex justify-center'>
         <Link href="/menucategories">
           <button className="bg-[#53422B] text-white p-3 rounded-md">Continue Shopping</button>
         </Link>

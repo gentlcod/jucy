@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -9,20 +8,20 @@ import { RiDiscountPercentFill } from "react-icons/ri";
 import { IoCheckbox } from "react-icons/io5";
 import { TbBasketPlus } from "react-icons/tb";
 import { 
-         limeJuiceImg, 
-         blueBerryJuiceImg, 
-         mangoJuiceImg,
-         passionFruitJuiceImg,
-         lycheeJuiceImg,
-         honeyDewJuiceImg
-        } from '../../../public/assets';
+  limeJuiceImg, 
+  blueBerryJuiceImg, 
+  mangoJuiceImg,
+  passionFruitJuiceImg,
+  lycheeJuiceImg,
+  honeyDewJuiceImg
+} from '../../../public/assets';
 import { PiBasketFill } from 'react-icons/pi';
 import { logoImg } from '../../../public/assets';
 import { db } from '../firebase';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 
-const discount = () => {
+const Discount = () => {
   const [shadow, setShadow] = useState(false);
   const [addedItems, setAddedItems] = useState([]);
   const [user, setUser] = useState(null);
@@ -41,40 +40,68 @@ const discount = () => {
   // Listen for user authentication changes
   useEffect(() => {
     const auth = getAuth();
-    onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser); // Set the user state when authenticated
+      if (currentUser) {
+        fetchBasketItems(currentUser.uid); // Fetch items on user authentication
+      }
     });
+    return () => unsubscribe(); // Cleanup subscription
   }, []);
+
+  // Fetch items from Firestore
+  const fetchBasketItems = async (uid) => {
+    const basketRef = collection(db, `users/${uid}/basket`);
+    const snapshot = await getDocs(basketRef);
+    const items = snapshot.docs.map(doc => doc.data().name); // Get item names
+    setAddedItems(items); // Set added items
+  };
 
   // Add to basket function
   const addToBasket = async (item) => {
-
-    if(!user) {
+    if (!user) {
       alert("Please sign in to add items to the basket.");
+      return; // Early return if the user is not authenticated
     }
 
-    if (user) {
-        console.log(item); // Debugging item details
-        // User is authenticated, proceed to add the item to the basket
-        try {
-            await addDoc(collection(db, `users/${user.uid}/basket`), { // Specify the user ID here
-                name: item.name,
-                price: item.price,
-                imageUrl: item.imageUrl,
-                description: item.description,
-                quantity: 1,
-                timestamp: new Date(),
-            });
-
-            setAddedItems([...addedItems, item.name]);
-            // alert(`${item.name} added to the basket!`);
-        } catch (error) {
-            console.error("Error adding item to basket: ", error);
-        }
+    if (addedItems.includes(item.name)) {
+      alert("This item is already in your basket."); // Notify user if item is already added
+      return; // Prevent adding again if already in the basket
     }
-};
 
-  
+    try {
+      await addDoc(collection(db, `users/${user.uid}/basket`), {
+        name: item.name,
+        price: item.price,
+        imageUrl: item.imageUrl,
+        description: item.description,
+        quantity: 1,
+        timestamp: new Date(),
+      });
+
+      setAddedItems((prev) => [...prev, item.name]); // Only update state if added successfully
+    } catch (error) {
+      console.error("Error adding item to basket: ", error);
+    }
+  };
+
+  // Remove from basket function
+  const removeFromBasket = async (item) => {
+    if (!user) return;
+
+    try {
+      const basketRef = collection(db, `users/${user.uid}/basket`);
+      const querySnapshot = await getDocs(basketRef);
+      const itemToDelete = querySnapshot.docs.find(doc => doc.data().name === item.name);
+      
+      if (itemToDelete) {
+        await deleteDoc(doc(basketRef, itemToDelete.id));
+        setAddedItems((prev) => prev.filter(name => name !== item.name)); // Update local state
+      }
+    } catch (error) {
+      console.error("Error removing item from basket: ", error);
+    }
+  };
 
   const juices = [
     {
@@ -120,8 +147,6 @@ const discount = () => {
       description: 'Mildly sweet and refreshing, with a smooth and mellow melon taste.',
     },
   ];
-
-  addToBasket(juices);
 
   return (
     <>
@@ -176,24 +201,26 @@ const discount = () => {
                       height={170}
                       width={170}
                       className={juice.name === 'Mango' ? '' : 'transform -scale-x-100'}
-                      
                     />
                     <div className='absolute top-[-.45rem] left-[-2.7rem]'>
                       <RiDiscountPercentFill style={{ color: '#FF4D00', fontSize: '65px' }} />
                     </div>
-                    <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3'>
+                    <div className='absolute top-1 right-1 bg-[#FF9900] shadow-xl border-[#555555] rounded-tr-2xl rounded-bl-2xl py-2 px-3' 
+                            onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation(); // Prevents the parent Link from triggering
+                            if(addedItems.includes(juice.name)) {
+                              removeFromBasket(juice) // Remove item if already added
+                            } else {
+                            addToBasket(juice); // Pass the juice item to addToBasket
+                            }
+                          }}>
                       {addedItems.includes(juice.name) ? (
                         <IoCheckbox style={{ color: '#fff', fontSize: '24px' }} />
                       ) : (
                         <TbBasketPlus
                           style={{ color: '#fff', fontSize: '24px' }}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation(); // Prevents the parent Link from triggering
-                            addToBasket(juice); // Pass the juice item to addToBasket
-                          }}
                         />
-
                       )}
                     </div>
                   </div>
@@ -224,4 +251,4 @@ const discount = () => {
   );
 };
 
-export default discount;
+export default Discount;
