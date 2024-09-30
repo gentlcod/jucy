@@ -38,6 +38,7 @@ const discount = () => {
     };
   }, []);
 
+  // Listen for user authentication changes
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (currentUser) => {
@@ -45,29 +46,35 @@ const discount = () => {
     });
   }, []);
 
+  // Add to basket function
   const addToBasket = async (item) => {
-    if (!user) {
+
+    if(!user) {
       alert("Please sign in to add items to the basket.");
-      return;
     }
 
-    try {
-      await addDoc(collection(db, 'basket'), {
-        uid: user.uid, // Store the user's unique ID with the basket item
-        name: item.name,
-        price: item.price,
-        imageUrl: item.imageUrl,
-        description: item.description,
-        quantity: 1, // default quantity
-        timestamp: new Date(),
-      });
+    if (user) {
+        console.log(item); // Debugging item details
+        // User is authenticated, proceed to add the item to the basket
+        try {
+            await addDoc(collection(db, `users/${user.uid}/basket`), { // Specify the user ID here
+                name: item.name,
+                price: item.price,
+                imageUrl: item.imageUrl,
+                description: item.description,
+                quantity: 1,
+                timestamp: new Date(),
+            });
 
-      setAddedItems([...addedItems, item.name]); // Add the item name to the addedItems state
-      alert(`${item.name} added to basket!`);
-    } catch (error) {
-      console.error("Error adding item to basket: ", error);
+            setAddedItems([...addedItems, item.name]);
+            // alert(`${item.name} added to the basket!`);
+        } catch (error) {
+            console.error("Error adding item to basket: ", error);
+        }
     }
-  };
+};
+
+  
 
   const juices = [
     {
@@ -91,7 +98,6 @@ const discount = () => {
       imageUrl: mangoJuiceImg,
       description: 'Sweet, creamy, and tropical, high in vitamins A and C.',
     },
-
     {
       name: 'Passion Fruit',
       price: 10.00,
@@ -114,6 +120,8 @@ const discount = () => {
       description: 'Mildly sweet and refreshing, with a smooth and mellow melon taste.',
     },
   ];
+
+  addToBasket(juices);
 
   return (
     <>
@@ -181,9 +189,11 @@ const discount = () => {
                           style={{ color: '#fff', fontSize: '24px' }}
                           onClick={(e) => {
                             e.preventDefault();
+                            e.stopPropagation(); // Prevents the parent Link from triggering
                             addToBasket(juice); // Pass the juice item to addToBasket
                           }}
                         />
+
                       )}
                     </div>
                   </div>

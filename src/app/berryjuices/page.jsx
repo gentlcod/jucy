@@ -38,28 +38,32 @@ const berryJuices = () => {
     });
   }, []);
 
-  const addToBasket = async (item) => {
-    if (!user) {
-      alert("Please sign in to add items to the basket.");
-      return;
-    }
+    // Add to basket function
+    const addToBasket = async (item) => {
 
-    try {
-      await addDoc(collection(db, 'basket'), {
-        uid: user.uid,
-        name: item.name,
-        price: item.price,
-        imageUrl: item.imageUrl,
-        description: item.description,
-        quantity: 1,
-        timestamp: new Date(),
-      });
-
-      setAddedItems([...addedItems, item.name]); // Add the item name to the addedItems state
-      alert(`${item.name} added to basket!`);
-    } catch (error) {
-      console.error("Error adding item to basket: ", error);
-    }
+      if(!user) {
+        alert("Please sign in to add items to the basket.");
+      }
+  
+      if (user) {
+          console.log(item); // Debugging item details
+          // User is authenticated, proceed to add the item to the basket
+          try {
+              await addDoc(collection(db, `users/${user.uid}/basket`), { // Specify the user ID here
+                  name: item.name,
+                  price: item.price,
+                  imageUrl: item.imageUrl,
+                  description: item.description,
+                  quantity: 1,
+                  timestamp: new Date(),
+              });
+  
+              setAddedItems([...addedItems, item.name]);
+              // alert(`${item.name} added to the basket!`);
+          } catch (error) {
+              console.error("Error adding item to basket: ", error);
+          }
+      }
   };
 
   const items = [
